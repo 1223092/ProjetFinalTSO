@@ -1,0 +1,8 @@
+@lxpanel --profile LXDE-pi
+@pcmanfm --desktop --profile LXDE-pi
+@xscreensaver -no-splash
+
+#matchbox-keyboard
+
+
+python3 /root/app-serrebrooke/syst_logique.py
