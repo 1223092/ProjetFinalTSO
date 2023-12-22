@@ -3,7 +3,7 @@
 ## Description des fichiers
 ### Notes
 #### Dernière révision des fichiers
-    @date   2022-02-01
+    @date   2023-12-22
 ###### syst_config.py
     @file       syst_config.py
     @date       Avril 2022
@@ -45,3 +45,8 @@
     @version    0.1
                 Adaptation pour capteurs DS18B20 multiples.
     @brief      Fichier permettant d'envoyer les données des capteurs par UDP.
+##### Controle_GPIO.py
+    @file       Controle_GPIO.py
+    @date       decembre 2023
+    @version    9.0 : 
+    @brief      script Python utilise Flask pour créer une application web permettant de contrôler et de suivre l'état des ports GPIO d'un Raspberry Pi.
