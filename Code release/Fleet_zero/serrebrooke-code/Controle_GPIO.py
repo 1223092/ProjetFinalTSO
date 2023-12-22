@@ -4,11 +4,12 @@
 
 from flask import Flask, render_template_string, request, jsonify, send_file
 import RPi.GPIO as GPIO  # Importe la bibliothèque pour contrôler les GPIO sur Raspberry Pi
-from datetime import datetime
+from datetime import datetime # Importe la bibliothèque pour le temps
+# Importe les bibliothèque pour les 3 types de fichier
 import json
 import csv
 import xml.etree.ElementTree as ET
-import os
+
 
 app = Flask(__name__)  # Création d'une instance de l'application Flask
 
