@@ -57,32 +57,15 @@ def push():
         jPayload[f"temp{iTempVal}"] = tVal
         iTempVal+=1
     
-    if(syst_config.CRIFA) :
-        if getSensors_atlas.tempVal != -1:#ajout de la valeur du capteur si il est present
-            tPayload["t"] = getSensors_atlas.tempVal       
-            jPayload["temp"] = getSensors_atlas.tempVal
-        if getSensors_atlas.co2Val != -1:#ajout de la valeur du capteur si il est present
-            tPayload["c"] = getSensors_atlas.co2Val
-            jPayload["co2"] = getSensors_atlas.co2Val
-        if getSensors_atlas.humVal != -1:#ajout de la valeur du capteur si il est present
-            tPayload["h"] = getSensors_atlas.humVal
-            jPayload["hum"] = getSensors_atlas.humVal
-    if(syst_config.HYDROPONIE) :       
-        if getSensors_atlas.tempVal != -1:#ajout de la valeur du capteur si il est present
-            tPayload[f"t{iTempVal}"] = getSensors_atlas.tempVal
-            jPayload["tempAtlas"] = getSensors_atlas.tempVal       
-        if getSensors_atlas.phVal != -1:#ajout de la valeur du capteur si il est present
-            tPayload["p"] = getSensors_atlas.phVal
-            jPayload["pH"] = getSensors_atlas.phVal       
-        if getSensors_atlas.ecVal != -1:#ajout de la valeur du capteur si il est present
-            tPayload["e"] = getSensors_atlas.ecVal
-            jPayload["ec"] = getSensors_atlas.ecVal
-        if getSensors_atlas.odVal != -1:#ajout de la valeur du capteur si il est present
-            tPayload["o"] = getSensors_atlas.odVal
-            jPayload["od"] = getSensors_atlas.odVal
-        if getSensors_atlas.orpVal != -1:#ajout de la valeur du capteur si il est present
-            tPayload["or"] = getSensors_atlas.orpVal
-            jPayload["orp"] = getSensors_atlas.orpVal
+    if getSensors_atlas.tempVal != -1:#ajout de la valeur du capteur si il est present
+        tPayload["t"] = getSensors_atlas.tempVal       
+        jPayload["temp"] = getSensors_atlas.tempVal
+    if getSensors_atlas.co2Val != -1:#ajout de la valeur du capteur si il est present
+        tPayload["c"] = getSensors_atlas.co2Val
+        jPayload["co2"] = getSensors_atlas.co2Val
+    if getSensors_atlas.humVal != -1:#ajout de la valeur du capteur si il est present
+        tPayload["h"] = getSensors_atlas.humVal
+        jPayload["hum"] = getSensors_atlas.humVal
     
     #calcul et ajout du checksum
     #chk = 0

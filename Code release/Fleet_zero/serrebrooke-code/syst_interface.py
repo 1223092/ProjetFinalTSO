@@ -40,71 +40,11 @@ def initLabelValue(pRoot, pWidth, pPosX, pPosY):
 
     return labelValue # retourne l'objet pour la référence
 
-def genAfficheHydroponie():
-    ''' Permet de générer l'affichage qui contient les informations pour une 
-        serre hydroponique. Affiche les valeurs de PH, d'Oxygène, d'ORP, de 
-        Conductivité, d'Humidité, de CO², de Température Atlas et des capteurs 
-        de température des DS18B20.
-    '''
-    # identification des variables globales de la fonction
-    global root
-    global lblPH 
-    global lblTemp
-    global lblEC
-    global lblOD
-    global lblHUM
-    global lblCO2
-    global lblDS1
-    global lblDS2
-    global lblDS3
-    global lblDS4
-
-    # POS COLONNE LEFT
-    # PH
-    initLabel(root, "PH", 2, "#ff2a00", syst_config.TKPOS_LEFT, syst_config.TKPOS_TOP) # text, width, couleur, pos x,y
-    lblPH = initLabelValue(root, 6, syst_config.TKPOS_LEFT, syst_config.TKPOS_TOP + syst_config.TKPOS_OFFSET) # width, pos x,y
-    
-    # OD
-    initLabel(root, "Oxygène (mg/L)", 14, "gold", syst_config.TKPOS_LEFT, syst_config.TKPOS_MIDDLE) # text, width, couleur, pos x,y
-    lblOD = initLabelValue(root, 6, syst_config.TKPOS_LEFT, syst_config.TKPOS_MIDDLE + syst_config.TKPOS_OFFSET) # width, pos x,y \\ taillTv-5
-    
-    # EC
-    initLabel(root, "Conductivité (dS/m)", 19, "green", syst_config.TKPOS_LEFT, syst_config.TKPOS_BOTTOM) # text, width, couleur, pos x,y
-    lblEC = initLabelValue(root, 6, syst_config.TKPOS_LEFT, syst_config.TKPOS_BOTTOM + syst_config.TKPOS_OFFSET) # width, pos x,y \\ taillTv-5
-    
-    # POS COLONNE CENTER
-    # TEMPERATURE
-    initLabel(root, "Temp Atlas (°C)", 15, "gray", syst_config.TKPOS_CENTER, syst_config.TKPOS_TOP) # text, width, couleur, pos x,y
-    lblTemp = initLabelValue(root, 6, syst_config.TKPOS_CENTER, syst_config.TKPOS_TOP + syst_config.TKPOS_OFFSET) # width, pos x,y
-    
-    # HUMIDITÉ
-    initLabel(root, "Humidité (%)", 12, "cyan", syst_config.TKPOS_CENTER, syst_config.TKPOS_MIDDLE + syst_config.TKPOS_TOP) # text, width, couleur, pos x,y
-    lblHUM = initLabelValue(root, 6, syst_config.TKPOS_CENTER, syst_config.TKPOS_MIDDLE + syst_config.TKPOS_TOP + syst_config.TKPOS_OFFSET) # width, pos x,y \\ taillTv-5
-    
-    # CO²
-    initLabel(root, "CO² (ppm)", 12, "orange", syst_config.TKPOS_CENTER, syst_config.TKPOS_BOTTOM) # text, width, couleur, pos x,y
-    lblCO2 = initLabelValue(root, 6, syst_config.TKPOS_CENTER, syst_config.TKPOS_BOTTOM + syst_config.TKPOS_OFFSET) # width, pos x,y \\ taillTv-5
-
-    # POS COLONNE RIGHT
-    # CAPTEURS DS18B20
-    # DS1
-    initLabel(root, "Temp. DS1 (°C)", 14, "magenta", syst_config.TKPOS_RIGHT, syst_config.TKPOS_TOP) # text, width, couleur, pos x,y
-    lblDS1 = initLabelValue(root, 6, syst_config.TKPOS_RIGHT, syst_config.TKPOS_TOP + syst_config.TKPOS_OFFSET) # width, pos x,y \\ taillTv-5
-    
-    # DS2
-    initLabel(root, "Temp. DS2 (°C)", 14, "magenta", syst_config.TKPOS_RIGHT, syst_config.TKPOS_MIDDLE) # text, width, couleur, pos x,y
-    lblDS2 = initLabelValue(root, 6, syst_config.TKPOS_RIGHT, syst_config.TKPOS_MIDDLE + syst_config.TKPOS_OFFSET) # width, pos x,y \\ taillTv-5
-    
-    # DS3
-    initLabel(root, "Temp. DS3 (°C)", 14, "magenta", syst_config.TKPOS_RIGHT, syst_config.TKPOS_BOTTOM) # text, width, couleur, pos x,y
-    lblDS3 = initLabelValue(root, 6, syst_config.TKPOS_RIGHT, syst_config.TKPOS_BOTTOM + syst_config.TKPOS_OFFSET) # width, pos x,y \\ taillTv-5
-
 def genAfficheCRIFA():
     ''' Permet de générer l'affichage pour une serre sans capteurs à eau. Affiche les
         résultats de CO², d'Humidité, de Température Atlas et des capteurs de température
         des DS18B20.
     '''
-    # identification des variables globales de la fonction
     global root
     global lblTemp
     global lblHUM
@@ -113,6 +53,7 @@ def genAfficheCRIFA():
     global lblDS2
     global lblDS3
     global lblDS4
+    global lblMOY
 
     # POS COLONNE LEFT
     # CO²
@@ -126,6 +67,10 @@ def genAfficheCRIFA():
     # TEMPERATURE ATLAS
     initLabel(root, "Temp. A (°C)", 12, "red", syst_config.TKPOS_LEFT, syst_config.TKPOS_BOTTOM) # text, width, couleur, pos x,y
     lblTemp = initLabelValue(root, 6, syst_config.TKPOS_LEFT, syst_config.TKPOS_BOTTOM + syst_config.TKPOS_OFFSET) # width, pos x,y
+
+    # Moyenne temperature
+    initLabel(root, "Temp. MOY (°C)", 9, "orange", syst_config.TKPOS_CENTER, syst_config.TKPOS_TOP) # text, width, couleur, pos x,y
+    lblMOY = initLabelValue(root, 6, syst_config.TKPOS_CENTER, syst_config.TKPOS_TOP + syst_config.TKPOS_OFFSET) # width, pos x,y 
 
     # CAPTEURS DS18B20
     # POS COLONNE CENTER
@@ -163,21 +108,15 @@ def initAffichage():
     #global panel
 
     print("Initialisation de l'affichage.")
-    print('Config. système:\tCRIFA:\t', syst_config.CRIFA, ' HYDRO:\t', syst_config.HYDROPONIE)
-
+    
     # Création de la fenêtre
     root = tk.Tk() # obj tkinter
     root.title("Serrebrooke")   # titre de la page
     root.config(bg = syst_config.TKI_BACKCOLOR) # couleur de fond de la fenêtre
     root.geometry(syst_config.TKI_RESOLUTION)   # dimension de l'écran, résolution de la fenêtre
     root.attributes("-fullscreen",syst_config.TKI_FULLSCREEN)   # mode plein écran, init = true
-
-    # Utilise l'affichage en fonction du mode choisi
-    if(syst_config.HYDROPONIE):
-        genAfficheHydroponie()
-    elif(syst_config.CRIFA):
-        genAfficheCRIFA()
     
+    genAfficheCRIFA()
     return root # retourne la variable globale pour référencer à d'autres fichiers
 
 def getValues():
@@ -185,12 +124,20 @@ def getValues():
         si les capteurs sont actifs. La gestion des valeurs se fait dans les fichiers 
         getSensors respectifs.
     '''
+    global root
+    global lblTemp
+    global lblHUM
+    global lblCO2
     global lblDS1
     global lblDS2
     global lblDS3
-    global lblCO2
-    
+    global lblDS4
+    global lblMOY
     # raffraichit les valeurs des capteurs DS18B20
+    # raffraîchit les valeurs 
+    # essaie de récupérer la valeur.
+    # si le capteur est inexistant, une exception est lancée, donc on affiche
+    # à la place "----" pour indiquer qu'il est absent. 
     try:
         lblDS1.config(text=str(getSensors_ds18b20.temp1))
     except:
@@ -203,90 +150,39 @@ def getValues():
         lblDS3.config(text=str(getSensors_ds18b20.temp3))
     except:
         lblDS3.config(text='----')
+    try:
+        lblDS4.config(text=str(getSensors_ds18b20.temp4))
+    except:
+        lblDS4.config(text='----')
+    try:
+        lblMOY.config(text=str(getSensors_ds18b20.tempMOY))
+    except:
+        lblMOY.config(text='----')
+
+    try:
+        if getSensors_atlas.humVal != -1:
+            lblHUM.config(text=str(getSensors_atlas.humVal))
+        else:
+            raise Exception()
+    except:
+        lblHUM.config(text='----')
     
-    # si CRIFA true
-    if(syst_config.CRIFA):
-        global root
-        global lblHUM
-        global lblTemp
-        global lblDS4
-        
-        # raffraîchit les valeurs 
-        # essaie de récupérer la valeur.
-        # si le capteur est inexistant, une exception est lancée, donc on affiche
-        # à la place "----" pour indiquer qu'il est absent. 
-        try:
-            lblDS4.config(text=str(getSensors_ds18b20.temp4))
-        except:
-            lblDS4.config(text='----')
+    try:
+        if getSensors_atlas.tempVal != -1:
+            lblTemp.config(text=str(getSensors_atlas.tempVal))
+        else:
+            raise Exception()
+    except:
+        lblTemp.config(text='----')
+    
+    try:
+        if getSensors_atlas.co2Val != -1:
+            lblCO2.config(text=str(getSensors_atlas.co2Val))
+        else:
+            raise Exception()
+    except:
+        lblCO2.config(text='----')
 
-        try:
-            if getSensors_atlas.humVal != -1:
-                lblHUM.config(text=str(getSensors_atlas.humVal))
-            else:
-                raise Exception()
-        except:
-            lblHUM.config(text='----')
-        
-        try:
-            if getSensors_atlas.tempVal != -1:
-                lblTemp.config(text=str(getSensors_atlas.tempVal))
-            else:
-                raise Exception()
-        except:
-            lblTemp.config(text='----')
-        
-        try:
-            if getSensors_atlas.co2Val != -1:
-                lblCO2.config(text=str(getSensors_atlas.co2Val))
-            else:
-                raise Exception()
-        except:
-            lblCO2.config(text='----')
-
-        
-                        
-    # si hydroponie true
-    if(syst_config.HYDROPONIE):
-        global lblPH 
-        global lblEC
-        global lblOD
-
-        # raffraîchit les valeurs 
-        # essaie de récupérer la valeur.
-        # si le capteur est inexistant, une exception est lancée, donc on affiche
-        # à la place "----" pour indiquer qu'il est absent. 
-        try:
-            if getSensors_atlas.phVal != -1:
-                lblPH.config(text=str(getSensors_atlas.phVal))
-            else:
-                raise Exception()
-        except:
-            lblPH.config(text='----')
-        
-        try:
-            if getSensors_atlas.ecVal != -1:
-                lblEC.config(text=str(getSensors_atlas.ecVal))
-            else:
-                raise Exception()
-        except:
-            lblEC.config(text='----')
-        
-        try:
-            if getSensors_atlas.odVal != -1:
-                lblOD.config(text=str(getSensors_atlas.odVal))
-            else:
-                raise Exception()
-        except:
-            lblOD.config(text='----')
-
-        try:
-            if getSensors_atlas.co2Val != -1:
-                lblCO2.config(text=str(getSensors_atlas.co2Val))
-            else:
-                raise Exception()
-        except:
-            lblCO2.config(text='----')
             
 def tkiAffiche(pRoot, pValues:bool=True):
     ''' Permet de gérer la récupération des valeurs si valide et
@@ -296,7 +192,6 @@ def tkiAffiche(pRoot, pValues:bool=True):
         et la validation pour récuprérer les valeurs des capteurs.
     '''
     global root
-
     root = pRoot
     if(pValues):
         getValues()        

@@ -17,7 +17,7 @@ import getSensors_ds18b20 # Fichier pour mesures 1-Wire
 import getSensors_atlas # Fichier pour mesures Atlas
 import publish_ThingSpeak # Fichier pour publié les données sur Thingspeak
 import publish_UDP # Fichier pour publié les données par UDP (Complémentaire avec projet Péridoseur)
-import RPi.GPIO as GPIO
+
 
 
 def pushRoutine():
@@ -37,18 +37,11 @@ def main():
     # Boucle principale
     mainRoot = syst_interface.initAffichage()
     syst_interface.tkiAffiche(pValues=False, pRoot=mainRoot)
-    
-    # Configuration des GPIO
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setwarnings(False)
-    GPIO.setup(19, GPIO.OUT)
 
     # schedule aux X minutes pour le CRIFA, puisqu'il est branché sur le LTE.
     # schedule aux X secondes pour le banc NFT, puisqu'il est branché sur le wifi du Cégep.
-    if syst_config.CRIFA:
-        schedule.every(syst_config.tsDelay).seconds.do(pushRoutine) # schedule aux X minutes
-    elif syst_config.HYDROPONIE:
-        schedule.every(syst_config.tsDelay).seconds.do(pushRoutine) # schedule aux X secondes
+    
+    schedule.every(syst_config.tsDelay).minutes.do(pushRoutine) # schedule aux X minutes
     
     cptDelay = 0    # compteur pour les 10 premiers envois sur Thingspeak. Applicable principalement
                     # au système CRIFA, puisque le délai est long. (habituellement 30 min)
@@ -62,14 +55,11 @@ def main():
         if cptDelay < 10:
             pushRoutine() # publie les données
             cptDelay+=1
-            GPIO.output(19, GPIO.LOW)
-            
-             
         else:
             schedule.run_pending() # routine schedule
 
         syst_interface.tkiAffiche(pRoot=mainRoot) # actualise l'affichage
-        sleep(syst_config.tkiDelay) # délai pour l'actualisation de l'affichage.
+        sleep(syst_config.tkiDelay) # délai pour l'actualisation de l'affichage. 2sec
         
 # Point d'entrée du programme
 if __name__ == '__main__':

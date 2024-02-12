@@ -40,33 +40,17 @@ def push():
     '''
     global loadDS18B20
     tPayload = getSensors_ds18b20.loadDS18B20 # ajout de la valeur des ds18b20
+  
+    # température capteur humidité
+    if getSensors_atlas.tempHVal != -1:
+        tPayload += "&field5=" + str(getSensors_atlas.tempVal)
+    # co²
+    if getSensors_atlas.co2Val != -1:  
+        tPayload += "&field6=" + str(getSensors_atlas.co2Val)
+    # humidité
+    if getSensors_atlas.humVal != -1: 
+        tPayload += "&field7=" + str(getSensors_atlas.humVal)
     
-    # ajout des valeurs s'ils sont disponibles
-    # si crifa
-    if(syst_config.CRIFA) :
-        # température capteur humidité
-        if getSensors_atlas.tempHVal != -1:
-            tPayload += "&field5=" + str(getSensors_atlas.tempVal)
-        # co²
-        if getSensors_atlas.co2Val != -1:  
-            tPayload += "&field6=" + str(getSensors_atlas.co2Val)
-        # humidité
-        if getSensors_atlas.humVal != -1: 
-            tPayload += "&field7=" + str(getSensors_atlas.humVal)
-    
-    # si hydroponie
-    elif(syst_config.HYDROPONIE) :       
-        # ph
-        if getSensors_atlas.phVal != -1:
-            tPayload += "&field3=" + str(getSensors_atlas.phVal)
-        # oxygène dissout
-        if getSensors_atlas.odVal != -1:
-            tPayload += "&field4=" + str(getSensors_atlas.odVal)
-        # conductivité
-        if getSensors_atlas.ecVal != -1:
-            tPayload += "&field5=" + str(getSensors_atlas.ecVal)
-        if getSensors_atlas.co2Val != -1:
-            tPayload += "&field6=" + str(getSensors_atlas.co2Val)
         
     try:
         #</new publish mqtt>

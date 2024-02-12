@@ -35,12 +35,6 @@ orp.set_i2c_address(syst_config.ADDR_ORP)
 
 
 def getAtlas():
-    ''' Permet de prendre les lectures des capturs Atlas en fonction du
-        système sélectionné dans le fichier <syst_config.py>.
-        Options possible:
-        - CRIFA
-        - HYDROPONIE
-    '''
     global tempVal, phVal, ecVal, odVal, orpVal, co2Val, tempHVal, humVal # labels qui contiennent les résultats des capteurs.
     global strAtlas # print console
 
@@ -56,30 +50,7 @@ def getAtlas():
     tempHVal = 0.0
     humVal   = 0.0
 
-    if syst_config.HYDROPONIE: # mode hydroponie 
-        getMesuresHydroponie()
-    
-    elif syst_config.CRIFA: # mode crifa
-        getMesuresCRIFA()
-
     print(strAtlas)# print le champ des résultats
-
-def getMesuresHydroponie():
-    ''' Prends les mesures des capteurs Atlas pour le système en mode HYDROPONIE.
-    '''
-    global temp, ph, ec, od, orp, co2, hum # objets des capteurs Atlas
-    global tempVal, phVal, ecVal, odVal, orpVal, co2Val, tempHVal # labels qui contiennent les résultats des capteurs.
-    global strAtlas
-
-    phVal = getMesure(ph, 'ph=\t', 'ph')
-    odVal = getMesure(od, 'od=\t', 'od')
-    ecVal = getMesure(ec, 'ec=\t', 'ec')/1000 # valeur convertit en dS/mg
-    co2Val = getMesure(co2, 'co2=\t', 'co2')
-    # pas utilisé pour le projet actuellment.
-    # on permet quand même leur utilisation.
-    tempVal = getMesure(temp, 'temp=\t', 'temp')
-    orpVal = getMesure(orp, 'orp=\t', 'orp')
-    getMesureHumidite()
 
 def getMesuresCRIFA():
     ''' Prends les mesures des capteurs Atlas pour le système en mode CRIFA.

@@ -19,20 +19,23 @@ def getDS18B20():
                 leurs positions.
     '''
     global loadDS18B20, strDS18B20 # pour payload Thingspeak
-    global temp1, temp2, temp3, temp4, tempUDP # labels températures
+    global temp1, temp2, temp3, temp4, tempUDP, tempMOY # labels températures
 
     nombreDS18B20 = 0 #pour la numerotation (temp1, temp2 ...)
     strDS18B20 = '' #texte de la valeur des capteurs
     loadDS18B20 = ''
+
     try:
         nbSensors = W1ThermSensor.get_available_sensors() # doit donner la liste des ds18b20 disponibles.
+        nbSensors = sorted(nbSensors, key=lambda x: x.id) # ca devrait mettre les capteurs en ordre croissant d'ID.
         tempUDP = [0]*len(nbSensors) # ajout d'une liste pour les ds18b20 disponibles
 
         for sensor in nbSensors:  # pour chaque sensor ds18b20 disponible
             W1ThermSensor.exists # capteur disponible?
             # nouvelle valeur
             nombreDS18B20 += 1 # incrémentation du nombre de capteurs
-            temp = round(sensor.get_temperature(), syst_config.PRECISION) # recupère la valeur du capteur 
+            temp = round(sensor.get_temperature(), syst_config.PRECISION) # recupère la valeur du capteur
+         
             strDS18B20+=('temperature'+str(nombreDS18B20)+' = '+str(temp)+'\n') # ajout de la données à la payload
                                                                                 # pour Thingspeak.
             
@@ -64,9 +67,10 @@ def getDS18B20():
             # si aucun capteur?
             else:
                 print("erreur: aucun connecteurs connectés")
+        tempMOY = (temp1+temp2+temp3+temp4)/4
     except:
         print("erreur strD")
         
     print(strDS18B20 + '\n')
     nombreDS18B20 = 0 #remise a zero de le numerotation des capteur
-   
+    

@@ -7,9 +7,7 @@
                 Permet de modifier les valeurs sans affecter la logique du code.
 '''
 
-#Configuration du sytème. L'affichage et les capteurs utilisés changent en fonction de la configuration choisie.
-HYDROPONIE = False
-CRIFA = True
+
 
 ## Publish Thingspeak
 # Pour les valeurs d'identification des différents channels, voir la fin du fichier.
@@ -22,7 +20,7 @@ MQTTHOST = "mqtt3.thingspeak.com"    # The Hostname of the ThinSpeak MQTT servic
 
 ## Publish PLC
 # UDP Connection
-useUnsecuredUDP = False
+useUnsecuredUDP = True
 
 # Fréquence d'acquisition
 tkiDelay = 2 # délai par défaut de l'aquisition des mesures
@@ -69,23 +67,12 @@ TKLEN_VAR = 30 # taille du texte des variables
 ### </END OF FILE>
 ## Valeurs du channel ThingSpeak
 
-# SERREBROOKE-NFT
-if HYDROPONIE:
-    CHANNELID = "1328019"       # Channel Serrebrooke-NFT
-    APIKEY = "VMDDBI3TNI7BRQQE" # API Key
+CHANNELID = "1296899"       # Channel CRIFA
+APIKEY = "H760997692T443A5" # API Key
 
-    MQTT_CLIENTID = "EgMZGAssAScsHSopOxs1AhM"
-    MQTT_USR = "EgMZGAssAScsHSopOxs1AhM"
-    MQTT_PWD = "1M9oQc1vtIU3IFjGKwtxdXns"
-
-# CRIFA
-elif CRIFA:
-    CHANNELID = "1296899"       # Channel CRIFA
-    APIKEY = "H760997692T443A5" # API Key
-
-    MQTT_CLIENTID = "JhwfFC0RLSsgHhI4MTkKLwo"
-    MQTT_USR = "JhwfFC0RLSsgHhI4MTkKLwo"
-    MQTT_PWD = "an8oTonCcaxFMvLBHmhnA1E6"
+MQTT_CLIENTID = "JhwfFC0RLSsgHhI4MTkKLwo"
+MQTT_USR = "JhwfFC0RLSsgHhI4MTkKLwo"
+MQTT_PWD = "an8oTonCcaxFMvLBHmhnA1E6"
 
 # PERIDOSEUR-TEST
 # CHANNELID = "1676290"       # Channel
