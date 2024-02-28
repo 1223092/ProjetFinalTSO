@@ -1,16 +1,16 @@
 #Contenu du projet Serrebrooke
-#Logiciel
-#-Balena :
+##Logiciel
+###-Balena :
 #        Fichiers de configuration du docker.
-#-Python :
+###-Python :
 #        Fichiers sources du code de programmation en python.
-#Manuel Technique :
+##Manuel Technique :
 #        Fichier explicative de l'entièreté du projet.
-#Matériel :
-#-Datasheet :
+##Matériel :
+###-Datasheet :
 #          Fichiers  des datasheets.
-#-PCB :
+###-PCB :
 #        Fichiers de schéma de conception du pcb pour l'interface One-Wire.
-#-Listes de pièce
+###-Listes de pièce
 
         
