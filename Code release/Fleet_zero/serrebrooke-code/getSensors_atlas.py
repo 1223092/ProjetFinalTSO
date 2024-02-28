@@ -12,17 +12,8 @@ import time # module pour sleep
 import syst_config # Fichier des variables, contantes, etc. configurables. Permet de modifier les valeurs sans affecter la logique du code.
 
 #création de objets atlas
-ph = atlas_i2c.AtlasI2C()
-ph.set_i2c_address(syst_config.ADDR_PH)
-
 temp = atlas_i2c.AtlasI2C()
 temp.set_i2c_address(syst_config.ADDR_TEMP)
-
-ec = atlas_i2c.AtlasI2C()
-ec.set_i2c_address(syst_config.ADDR_EC)
-
-od = atlas_i2c.AtlasI2C()
-od.set_i2c_address(syst_config.ADDR_OD)
 
 co2 = atlas_i2c.AtlasI2C()
 co2.set_i2c_address(syst_config.ADDR_CO2)
@@ -30,27 +21,21 @@ co2.set_i2c_address(syst_config.ADDR_CO2)
 hum = atlas_i2c.AtlasI2C()
 hum.set_i2c_address(syst_config.ADDR_HUM)
 
-orp = atlas_i2c.AtlasI2C()
-orp.set_i2c_address(syst_config.ADDR_ORP)
-
 
 def getAtlas():
-    global tempVal, phVal, ecVal, odVal, orpVal, co2Val, tempHVal, humVal # labels qui contiennent les résultats des capteurs.
+    global tempVal, co2Val, tempHVal, humVal # labels qui contiennent les résultats des capteurs.
     global strAtlas # print console
 
     strAtlas = "" # liste des capteur atlas présent et leurs valeurs 
     
     # init les variables
     tempVal  = 0.0
-    phVal    = 0.0
-    ecVal    = 0.0
-    odVal    = 0.0
-    orpVal   = 0.0
     co2Val   = 0.0
     tempHVal = 0.0
     humVal   = 0.0
-
+    getMesuresCRIFA()
     print(strAtlas)# print le champ des résultats
+    
 
 def getMesuresCRIFA():
     ''' Prends les mesures des capteurs Atlas pour le système en mode CRIFA.

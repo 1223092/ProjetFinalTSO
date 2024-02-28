@@ -17,6 +17,7 @@ import getSensors_ds18b20 # Fichier pour mesures 1-Wire
 import getSensors_atlas # Fichier pour mesures Atlas
 import publish_ThingSpeak # Fichier pour publié les données sur Thingspeak
 import publish_UDP # Fichier pour publié les données par UDP (Complémentaire avec projet Péridoseur)
+import Boucle
 
 
 
@@ -49,6 +50,7 @@ def main():
         # mesure des capteurs 1-Wire et Atlas
         getSensors_ds18b20.getDS18B20() 
         getSensors_atlas.getAtlas()
+        Boucle.verif()
 
         # Pour les 10 premieres acquisitions...
         # else, on utilise l'événement pushRoutine()
