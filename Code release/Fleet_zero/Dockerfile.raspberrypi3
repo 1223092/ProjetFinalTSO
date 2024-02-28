@@ -10,8 +10,8 @@ RUN install_packages xserver-xorg-core \
     raspberrypi-ui-mods rpd-icons \
     gtk2-engines-clearlookspix \
     matchbox-keyboard \
-	  git python3-tk thonny python3-pip \
-	  xterm python-smbus i2c-tools
+	git python3-tk thonny python3-pip \
+	xterm python-smbus i2c-tools
 
 # installation packages serrebrooke
 RUN pip3 install tk atlas-i2c w1thermsensor schedule paho-mqtt requests psutil flask rpi.gpio flask_sqlalchemy
@@ -40,4 +40,4 @@ COPY autostart /etc/xdg/lxsession/LXDE-pi/autostart
 
 ENV UDEV=1
 
-CMD ["bash", "start.sh"] && modprobe w1-gpio && modprobe w1-them && modprobe i2c-dev
+CMD ["bash", "start.sh","node", "/root/app-serrebrooke/index.js"] && modprobe w1-gpio && modprobe w1-them && modprobe i2c-dev
