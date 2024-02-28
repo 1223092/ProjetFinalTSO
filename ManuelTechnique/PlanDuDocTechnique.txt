@@ -1,0 +1,22 @@
+1. Présentation du projet
+
+(De usager à Technicien)
+
+2.Usager
+2.1 Physique
+Comment installer et tout brancher
+Liste du matériels = les capteurs
+2.2 Logiciel
+l'interface web
+ThingSpeak
+
+
+3. Technicien
+Liste du matériels = carte de développement (Pi,hat,tentacle3)
+Explication des branchements
+Balena
+
+4. (Technicien ++) Faire un projet from scratch
+docker
+balena
+le code python
