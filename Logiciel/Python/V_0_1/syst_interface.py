@@ -14,6 +14,7 @@ import tkinter as tk # module pour affichage
 import getSensors_atlas # pour récupérer les valeurs des lectures Atlas
 import getSensors_ds18b20 # pour récupérer les valeurs des lecture 1-Wire
 import syst_config # fichier constantes <syst_config.py>
+import syst_logique
 
 def initLabel(pRoot, pText, pWidth, pFg, pPosX, pPosY):
     ''' Permet d'initialiser un objet tkinter label de titre.
@@ -65,7 +66,7 @@ def genAfficheCRIFA():
     lblHUM = initLabelValue(root, 6, syst_config.TKPOS_LEFT, syst_config.TKPOS_MIDDLE + syst_config.TKPOS_TOP + syst_config.TKPOS_OFFSET) # width, pos x,y 
     
     # connection internet
-    initLabel(root, "Connection status", 16, "red", syst_config.TKPOS_LEFT, syst_config.TKPOS_BOTTOM) # text, width, couleur, pos x,y
+    initLabel(root, "Connection status", 17, "red", syst_config.TKPOS_LEFT, syst_config.TKPOS_BOTTOM) # text, width, couleur, pos x,y
     lblInternet = initLabelValue(root, 6, syst_config.TKPOS_LEFT, syst_config.TKPOS_BOTTOM + syst_config.TKPOS_OFFSET) # width, pos x,y
 
     # Moyenne temperature
