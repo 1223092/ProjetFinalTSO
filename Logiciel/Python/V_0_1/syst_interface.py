@@ -46,7 +46,7 @@ def genAfficheCRIFA():
         des DS18B20.
     '''
     global root
-    global lblTemp
+    global lblInternet
     global lblHUM
     global lblCO2
     global lblDS1
@@ -64,9 +64,9 @@ def genAfficheCRIFA():
     initLabel(root, "Humidité (%)", 12, "cyan", syst_config.TKPOS_LEFT, syst_config.TKPOS_MIDDLE + syst_config.TKPOS_TOP) # text, width, couleur, pos x,y
     lblHUM = initLabelValue(root, 6, syst_config.TKPOS_LEFT, syst_config.TKPOS_MIDDLE + syst_config.TKPOS_TOP + syst_config.TKPOS_OFFSET) # width, pos x,y 
     
-    # TEMPERATURE ATLAS
-    initLabel(root, "Temp. A (°C)", 12, "red", syst_config.TKPOS_LEFT, syst_config.TKPOS_BOTTOM) # text, width, couleur, pos x,y
-    lblTemp = initLabelValue(root, 6, syst_config.TKPOS_LEFT, syst_config.TKPOS_BOTTOM + syst_config.TKPOS_OFFSET) # width, pos x,y
+    # connection internet
+    initLabel(root, "Connection status", 16, "red", syst_config.TKPOS_LEFT, syst_config.TKPOS_BOTTOM) # text, width, couleur, pos x,y
+    lblInternet = initLabelValue(root, 6, syst_config.TKPOS_LEFT, syst_config.TKPOS_BOTTOM + syst_config.TKPOS_OFFSET) # width, pos x,y
 
     # Moyenne temperature
     initLabel(root, "Temp. MOY (°C)", 9, "orange", syst_config.TKPOS_CENTER, syst_config.TKPOS_TOP) # text, width, couleur, pos x,y
@@ -168,12 +168,9 @@ def getValues():
         lblHUM.config(text='----')
     
     try:
-        if getSensors_atlas.tempVal != -1:
-            lblTemp.config(text=str(getSensors_atlas.tempVal))
-        else:
-            raise Exception()
+        lblInternet.config(text=str(syst_logique.internet))   
     except:
-        lblTemp.config(text='----')
+        lblInternet.config(text='----')
     
     try:
         if getSensors_atlas.co2Val != -1:

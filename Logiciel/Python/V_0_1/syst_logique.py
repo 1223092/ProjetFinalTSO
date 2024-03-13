@@ -17,19 +17,28 @@ import getSensors_ds18b20 # Fichier pour mesures 1-Wire
 import getSensors_atlas # Fichier pour mesures Atlas
 import publish_ThingSpeak # Fichier pour publié les données sur Thingspeak
 import publish_UDP # Fichier pour publié les données par UDP (Complémentaire avec projet Péridoseur)
-import Boucle
+import socket
 
-
+global internet
 
 def pushRoutine():
     ''' Routine qui execute le code a l'intervalle determinee.
     '''
-    # si un des types de connexions MQTT est vrai?
-    if syst_config.useSSLWebsockets|syst_config.useUnsecuredTCP|syst_config.useUnsecuredWebsockets:
-        publish_ThingSpeak.push() # publie sur thingspeak
-    # si connexion UDP vrai?
-    if syst_config.useUnsecuredUDP:
-        publish_UDP.push()
+    try :
+        # si un des types de connexions MQTT est vrai?
+        if syst_config.useSSLWebsockets|syst_config.useUnsecuredTCP|syst_config.useUnsecuredWebsockets:
+            publish_ThingSpeak.push() # publie sur thingspeak
+            internet = "ON"
+        # si connexion UDP vrai?
+        if syst_config.useUnsecuredUDP:
+            publish_UDP.push()
+            internet = "ON"
+    except socket.error as e :
+        print("An error occurred:", e)
+        internet = "OFF"
+        # Handle the error gracefully, possibly log it
+        # Here, you can continue executing the rest of your code
+
 
 
 def main():
@@ -50,7 +59,6 @@ def main():
         # mesure des capteurs 1-Wire et Atlas
         getSensors_ds18b20.getDS18B20() 
         getSensors_atlas.getAtlas()
-        Boucle.verif()
 
         # Pour les 10 premieres acquisitions...
         # else, on utilise l'événement pushRoutine()
