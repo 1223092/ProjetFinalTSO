@@ -51,7 +51,7 @@ def main():
     # schedule aux X minutes pour le CRIFA, puisqu'il est branché sur le LTE.
     # schedule aux X secondes pour le banc NFT, puisqu'il est branché sur le wifi du Cégep.
     
-    schedule.every(syst_config.tsDelay).minutes.do(pushRoutine) # schedule aux X minutes
+    schedule.every(syst_config.tsDelay).seconds.do(pushRoutine) # schedule aux X minutes
     
     cptDelay = 0    # compteur pour les 10 premiers envois sur Thingspeak. Applicable principalement
                     # au système CRIFA, puisque le délai est long. (habituellement 30 min)

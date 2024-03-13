@@ -24,7 +24,7 @@ useUnsecuredUDP = True
 
 # Fréquence d'acquisition
 tkiDelay = 2 # délai par défaut de l'aquisition des mesures
-tsDelay = 10 # delai d'intervalle au minutes pour envoyer les donnees sur thingspeak
+tsDelay = 5 # delai d'intervalle au minutes pour envoyer les donnees sur thingspeak
 
 # Mesures
 PRECISION = 1 # précision décimale, nombres de décimales
