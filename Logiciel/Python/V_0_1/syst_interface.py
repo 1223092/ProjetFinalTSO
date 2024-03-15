@@ -15,6 +15,7 @@ import getSensors_atlas # pour récupérer les valeurs des lectures Atlas
 import getSensors_ds18b20 # pour récupérer les valeurs des lecture 1-Wire
 import syst_config # fichier constantes <syst_config.py>
 import syst_logique
+import publish_ThingSpeak as status
 
 def initLabel(pRoot, pText, pWidth, pFg, pPosX, pPosY):
     ''' Permet d'initialiser un objet tkinter label de titre.
@@ -70,7 +71,7 @@ def genAfficheCRIFA():
     lblInternet = initLabelValue(root, 6, syst_config.TKPOS_LEFT, syst_config.TKPOS_BOTTOM + syst_config.TKPOS_OFFSET) # width, pos x,y
 
     # Moyenne temperature
-    initLabel(root, "Temp. MOY (°C)", 9, "orange", syst_config.TKPOS_CENTER, syst_config.TKPOS_TOP) # text, width, couleur, pos x,y
+    initLabel(root, "Temp. MOY (°C)", 14, "orange", syst_config.TKPOS_CENTER, syst_config.TKPOS_TOP) # text, width, couleur, pos x,y
     lblMOY = initLabelValue(root, 6, syst_config.TKPOS_CENTER, syst_config.TKPOS_TOP + syst_config.TKPOS_OFFSET) # width, pos x,y 
 
     # CAPTEURS DS18B20
@@ -169,7 +170,7 @@ def getValues():
         lblHUM.config(text='----')
     
     try:
-        lblInternet.config(text=str(syst_logique.internet))   
+        lblInternet.config(text=(status.connectionStatus))   
     except:
         lblInternet.config(text='----')
     
