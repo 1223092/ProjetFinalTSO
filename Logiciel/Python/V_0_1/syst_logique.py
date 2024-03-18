@@ -19,25 +19,16 @@ import publish_ThingSpeak # Fichier pour publié les données sur Thingspeak
 import publish_UDP # Fichier pour publié les données par UDP (Complémentaire avec projet Péridoseur)
 import socket
 
-global internet
 
 def pushRoutine():
     ''' Routine qui execute le code a l'intervalle determinee.
     '''
-    try :
-        # si un des types de connexions MQTT est vrai?
-        if syst_config.useSSLWebsockets|syst_config.useUnsecuredTCP|syst_config.useUnsecuredWebsockets:
-            publish_ThingSpeak.push() # publie sur thingspeak
-            internet = "ON"
-        # si connexion UDP vrai?
-        if syst_config.useUnsecuredUDP:
-            publish_UDP.push()
-            internet = "ON"
-    except socket.error as e :
-        print("An error occurred:", e)
-        internet = "OFF"
-        # Handle the error gracefully, possibly log it
-        # Here, you can continue executing the rest of your code
+    # si un des types de connexions MQTT est vrai?
+    if syst_config.useSSLWebsockets|syst_config.useUnsecuredTCP|syst_config.useUnsecuredWebsockets:
+        publish_ThingSpeak.push() # publie sur thingspeak
+    # si connexion UDP vrai?
+    if syst_config.useUnsecuredUDP:
+        publish_UDP.push()
 
 
 
@@ -47,11 +38,9 @@ def main():
     # Boucle principale
     mainRoot = syst_interface.initAffichage()
     syst_interface.tkiAffiche(pValues=False, pRoot=mainRoot)
-
-    # schedule aux X minutes pour le CRIFA, puisqu'il est branché sur le LTE.
-    # schedule aux X secondes pour le banc NFT, puisqu'il est branché sur le wifi du Cégep.
     
-    schedule.every(syst_config.tsDelay).seconds.do(pushRoutine) # schedule aux X minutes
+    #Creation d'une routine qui sera publié à toutes le X secondes
+    schedule.every(syst_config.tsDelay).seconds.do(pushRoutine)
     
     cptDelay = 0    # compteur pour les 10 premiers envois sur Thingspeak. Applicable principalement
                     # au système CRIFA, puisque le délai est long. (habituellement 30 min)
@@ -66,10 +55,11 @@ def main():
             pushRoutine() # publie les données
             cptDelay+=1
         else:
+            # Appel la routine de schedule
             schedule.run_pending() # routine schedule
 
         syst_interface.tkiAffiche(pRoot=mainRoot) # actualise l'affichage
-        sleep(syst_config.tkiDelay) # délai pour l'actualisation de l'affichage. 2sec
+        sleep(syst_config.tkiDelay) # délai pour l'actualisation de l'affichage. 2sec , donc pause de 2 secondes à la fin du while 
         
 # Point d'entrée du programme
 if __name__ == '__main__':

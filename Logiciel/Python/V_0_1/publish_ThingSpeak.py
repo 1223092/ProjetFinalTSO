@@ -34,11 +34,13 @@ if syst_config.useSSLWebsockets:
 # Create the topic string
 topic = "channels/" + channelID + "/publish" # + apiKey # </debug> Test correction erreur mqtt handshake </>
 
+# Variable utilisé dans syst_interface pour l'affichage du status de connection
+connectionStatus = "OFF"
 
 def push():
     ''' Permet de formatter la payload et de l'envoyer à Thingspeak.
     '''
-    global loadDS18B20
+    global loadDS18B20, connectionStatus
     tPayload = getSensors_ds18b20.loadDS18B20 # ajout de la valeur des ds18b20
   
     # température capteur humidité
@@ -51,7 +53,7 @@ def push():
     if getSensors_atlas.humVal != -1: 
         tPayload += "&field7=" + str(getSensors_atlas.humVal)
     
-        
+    # Essaie d'envoie de trame mqtt
     try:
         #</new publish mqtt>
         print ("Writing Payload = ", tPayload," to host: ", syst_config.MQTTHOST, " to topic: ", topic,
@@ -61,5 +63,7 @@ def push():
                         client_id=syst_config.MQTT_CLIENTID, auth={'username':syst_config.MQTT_USR,'password':syst_config.MQTT_PWD})
         #</>
         print ("Published"+"\n")
+        connectionStatus = "ON"
     except Exception as e:
         print ("There was an error while publishing the data.\nException: ", e)
+        connectionStatus = "OFF"

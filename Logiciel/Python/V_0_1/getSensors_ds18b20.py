@@ -43,7 +43,7 @@ def getDS18B20():
             # formattage du field à envoyer
             if nombreDS18B20 == 1:
                 temp1 = temp
-                loadDS18B20 += "&field" + str(nombreDS18B20) + "=" + str(temp1)
+                loadDS18B20 += "&field" + str(nombreDS18B20) + "=" + str(temp1) # champ pour thingspeak
                 tempUDP[nombreDS18B20-1] = temp # champ pour udp
 
             elif nombreDS18B20 == 2:
