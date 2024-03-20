@@ -6,6 +6,7 @@
                 Adaptation pour fonctionnalité UDP.
     @brief      Ce fichier permet de faire une lecture des capteurs ds18b20 connecter et d'attribuer cette valeur à une variable.
                 Ce fichier utilise la librairie "W1ThermSensor".
+    @Auteurs    Andy Van Flores Gonzalez, Loïc Sarhy
 '''
 
 from w1thermsensor import W1ThermSensor # module 1-wire
