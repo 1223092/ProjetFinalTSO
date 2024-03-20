@@ -6,6 +6,7 @@
     @brief      Fichier des variables, contantes, etc. configurables.
                 Permet de modifier les valeurs sans affecter la logique du code.
     @Auteurs    Andy Van Flores Gonzalez, Loïc Sarhy
+    @compilateur interpreteur Python
 '''
 
 
