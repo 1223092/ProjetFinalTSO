@@ -1,3 +1,3 @@
 #Contient les dossiers classé selon leurs langage de programmation.
 
-#Le dossier Balena comprend pricinpalement 
+#Le dossier Balena contient des fichiers bash pour l'initialisation des conteneurs
