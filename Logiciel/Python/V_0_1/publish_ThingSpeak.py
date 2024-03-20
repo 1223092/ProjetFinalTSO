@@ -4,6 +4,7 @@
     @version    0.1
                 Adaptation pour fonctionnalité UDP.
     @brief      Fichier permettant d'envoyer les données vers ThingSpeak.
+    @Auteurs    Andy Van Flores Gonzalez, Loïc Sarhy
 '''
 
 import paho.mqtt.publish as publish # module pour publié par MQTT
