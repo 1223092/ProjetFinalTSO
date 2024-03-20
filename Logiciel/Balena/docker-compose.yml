@@ -1,8 +1,0 @@
-version: "2.1"
-
-services:
-  serrebrooke:
-    build: .
-    privileged: true
-    labels:
-      io.balena.features.dbus: '1'
