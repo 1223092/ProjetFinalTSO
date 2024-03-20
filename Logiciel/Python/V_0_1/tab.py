@@ -7,6 +7,7 @@
                 Il récupère les valeurs critiques pour la gestion des boucles de contrôle.
                 Gestion de la communication avec les prises intelligentes via le point d'accès WIFI.
     @Auteurs    Andy Van Flores Gonzalez, Loïc Sarhy
+    @compilateur interpreteur Python
 '''
 from flask import Flask, render_template_string, jsonify, request, Response ,redirect
 import requests
