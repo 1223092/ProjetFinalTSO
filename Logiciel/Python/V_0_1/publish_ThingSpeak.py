@@ -18,6 +18,7 @@ import getSensors_atlas # valeurs mesures Atlas
 #  ThingSpeak Channel Settings
 channelID = syst_config.CHANNELID # The ThingSpeak Channel ID 
 apiKey = syst_config.APIKEY # The Write API Key for the channel
+connectionStatus = "None"
 
 # Set up the connection parameters based on the connection type
 if syst_config.useUnsecuredTCP:

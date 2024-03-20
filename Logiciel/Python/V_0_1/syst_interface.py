@@ -129,7 +129,7 @@ def getValues():
         getSensors respectifs.
     '''
     global root
-    global lblTemp
+    global lblInternet
     global lblHUM
     global lblCO2
     global lblDS1
