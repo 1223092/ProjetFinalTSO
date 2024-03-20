@@ -6,6 +6,7 @@
     @brief      Point d'entrée du programme. Ce fichier fichier permet d'exécuter les méthodes
                 appartenant aux autres fichiers du répertoire.
     @Auteurs    Andy Van Flores Gonzalez, Loïc Sarhy
+    @compilateur interpreteur Python
 '''
 #!/bin/python3
 
