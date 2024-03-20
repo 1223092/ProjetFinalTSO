@@ -1,3 +1,12 @@
+'''
+    @file       tab.py
+    @date       Avril 2024
+    @version    0.1
+                Interface web.
+    @brief      Ce fichier comprend le page web
+                Il récupère les valeurs critiques pour la gestion des boucles de contrôle.
+                Gestion de la communication avec les prises intelligentes via le point d'accès WIFI.
+'''
 from flask import Flask, render_template_string, jsonify, request, Response ,redirect
 import requests
 import json
