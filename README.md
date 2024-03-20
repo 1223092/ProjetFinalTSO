@@ -1,21 +1,12 @@
 ## Project: Serrebrooke
 
-### Software
-- **Balena**:
-  - Configuration files for Docker.
-- **Python**:
-  - Source code files for Python programming.
+### Logiciel
+#### Comprend les dossiers des fichiers de programmation.
 
-### Technical Manual
-- **Manuel Technique**:
-  - Explanatory file detailing the entirety of the project.
+### Manuel Technique
+#### Comprend le fichier texte explicant l'entièreté du projet.
 
-### Hardware
-- **Datasheet**:
-  - Data sheets files.
-- **PCB**:
-  - Design schema files for the One-Wire interface PCB.
-- **Bill of Materials**:
-  - Lists of required parts.
+### Materiel
+#### Comprend de la documentation sur tout les objets physiques utilisé.
 
         
