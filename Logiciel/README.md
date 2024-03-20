@@ -1,1 +1,3 @@
-#Contient les dossiers des différents classé selon leurs langage de programmation.
+#Contient les dossiers classé selon leurs langage de programmation.
+
+#Le dossier Balena comprend pricinpalement 
