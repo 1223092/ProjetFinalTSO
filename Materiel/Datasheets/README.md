@@ -5,7 +5,7 @@
 #### Capteurs de température.
 
 ### EZO_CO2
-### Capteur de CO2 de la compagnie ATLAS SCIENTIFIQUE.
+#### Capteur de CO2 de la compagnie ATLAS SCIENTIFIQUE.
 
 ### EZO_HUM
 #### Capteur d'humidité de la compagnie ATLAS SCIENTIFIQUE.
@@ -23,4 +23,4 @@
 #### Fiche technique de la carte de développement afin de connecter les capteurs de la compagnie ATLAS SCIENTIFIQUE.
 
 ### manquant
-### Liste des fiches techniques manquantes.
+#### Liste des fiches techniques manquantes.
