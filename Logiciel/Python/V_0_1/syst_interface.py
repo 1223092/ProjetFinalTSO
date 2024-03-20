@@ -9,6 +9,7 @@
                 les fonctions pour sa construction et de récupérer les valeurs des
                 lectures de capteurs pour actualiser l'affichage.
     @Auteurs    Andy Van Flores Gonzalez, Loïc Sarhy
+    @compilateur interpreteur Python
 '''
 from time import sleep # pour fonction sleep()
 import tkinter as tk # module pour affichage
