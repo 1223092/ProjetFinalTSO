@@ -537,7 +537,7 @@ def lumiere2():
  
 @app.route('/action/deshumidificateurs', methods=['POST'])
 def deshumidificateurs():
-    url = "http://{ip}/cm?cmnd=Power/cm?cmnd=Power%20toggle"
+    url = "http://10.42.0.85/cm?cmnd=Power%20toggle"
     try:
         response = requests.get(url)
         return f"deshumidificateurs commuté. Status: {response.status_code}"
