@@ -169,39 +169,30 @@ def index():
                 </div>
             </div>                    
             <div class="tab-pane fade" id="Programming" role="tabpanel" aria-labelledby="programming-tab">
-                <h2>Interface de programmation </h2>
-                <div id="scheduler" class="mt-3">
-                    <label for="appliance">Sélectionnez l'appareil :</label>
-                    <select class="form-select" id="appliance">
-                        <option value="light">Lumière</option>
-                        <option value="heater">Chauffage</option>  
-                        <option value="ventilation">Ventilation</option>
-                        <option value="humidifier">Humidificateur</option>                  
-                    </select>
-                    <label for="day" class="mt-3">Sélectionnez le jour :</label>
-                        <select class="form-select" id="day">
-                            <option value="Monday">Lundi</option>
-                            <option value="Tuesday">Mardi</option>
-                            <option value="Wednesday">Mercredi</option>
-                            <option value="Thursday">Jeudi</option> 
-                            <option value="Friday">Vendredi</option>
-                            <option value="Saturday">Samedi</option>
-                            <option value="Sunday">Dimanche</option>
-                        </select> 
-                    <div class="mt-3">
-                        <label for="time">Sélectionnez l'heure :</label>
-                        <input type="time" id="time" class="form-control">
-                    </div> 
-                    <div class="mt-3">
-                        <button id="saveSchedule" class="btn btn-primary">Enregistrer le programme</button>
-                    </div>  
-                </div> 
-                <div id="scheduleList" class="mt-4">
-                    <h3>Tâches programmées</h3>
-                    <ul id="tasks" class="list-group"></ul>
-                </div>                                                                                          
-            </div> 
-                                  
+                <ul class="nav nav-tabs" id="innerTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="fixed-values-tab" data-bs-toggle="tab" data-bs-target="#FixedValues" type="button" role="tab" aria-controls="FixedValues" aria-selected="true">Valeurs Fixes</button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="innerTabContent">
+                    <div class="tab-pane fade show active" id="FixedValues" role="tabpanel" aria-labelledby="fixed-values-tab">                  
+                        <div class="temperature-set-section">
+                            <h2>Définir la valeur de température</h2>
+                            <input type="number" id="temperatureValue" placeholder="Entrez la température en Celsius" step="0.01">
+                            <button onclick="setTemperature()">Définir</button>
+                            <button onclick="clearTemperature()">Effacer</button>
+                            <p>Température actuelle définie : <span id="currentTemperature">NA</span>°C</p>
+                        </div> 
+                        <div class="humidity-set-section">
+                            <h2>Définir la valeur d'humidité</h2>
+                            <input type="number" id="humidityValue" placeholder="Entrez l'humidité en pourcentage" min="0" max="100" step="0.01">
+                            <button onclick="setHumidity()">Définir</button>
+                            <button onclick="clearHumidity()">Effacer</button>
+                            <p>Humidité actuelle définie : <span id="currentHumidity">NA</span>%</p>
+                        </div>           
+                    </div>               
+                </div>                                                                                                                        
+            </div>                      
             <div class="tab-pane fade show active" id="Dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
                 <div class="row">
                     <div class="col-md-6 embed-responsive embed-responsive-16by9 mb-4">
@@ -254,7 +245,83 @@ def index():
             </div>                                                  
         </div>
     </div>
-    <script>                          
+    <script>
+        function setHumidity() {
+            var humidity = document.getElementById('humidityValue').value;
+            fetch('/set_humidity', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ humidity: humidity }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('currentHumidity').textContent = humidity;
+            })
+            .catch(error => console.error('Erreur:', error));
+        }
+
+        function clearHumidity() {
+            fetch('/clear_humidity', {
+                method: 'POST',
+            })
+            .then(response => {
+                document.getElementById('currentHumidity').textContent = 'NA';
+                document.getElementById('humidityValue').value = '';
+            })
+            .catch(error => console.error('Erreur:', error));
+        }
+
+        function fetchCurrentHumidity() {
+            fetch('/get_current_humidity')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('currentHumidity').textContent = data.humidity || 'NA';
+                })
+                .catch(error => console.error('Erreur:', error));
+        }
+
+        document.getElementById('programming-tab').addEventListener('click', fetchCurrentHumidity);
+
+        function fetchCurrentTemperature() {
+            fetch('/get_current_temperature')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('currentTemperature').textContent = data.temperature || 'NA';
+                })
+                .catch(error => console.error('Erreur:', error));
+        }
+
+        // Appeler fetchCurrentTemperature lorsque l'onglet Programmation est sélectionné
+        document.getElementById('programming-tab').addEventListener('click', fetchCurrentTemperature);                          
+        function setTemperature() {
+            var temperature = document.getElementById('temperatureValue').value;
+            fetch('/set_temperature', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ temperature: temperature }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('currentTemperature').textContent = temperature;
+            })
+            .catch(error => console.error('Erreur:', error));
+        }
+
+        function clearTemperature() {
+            fetch('/clear_temperature', {
+                method: 'POST',
+            })
+            .then(response => {
+                document.getElementById('currentTemperature').textContent = 'NA';
+                document.getElementById('temperatureValue').value = '';
+            })
+            .catch(error => console.error('Erreur:', error));
+        }
+                                                    
         function openTab(evt, tabName) 
         {
                 var i, tabcontent, tablinks;
@@ -361,6 +428,19 @@ def download_json():
     else:
         return "Failed to fetch data", 500
 
+
+@app.route('/get_current_temperature')
+def get_current_temperature():
+    try:
+        with open('temp_set.txt', 'r') as file:
+            temperature = file.read().strip()
+            if not temperature:  # Si le fichier est vide, renvoyer "NA"
+                temperature = "NA"
+    except FileNotFoundError:
+        temperature = "NA"  # Si le fichier n'existe pas, renvoyer "NA"
+    return jsonify({'temperature': temperature})
+
+
 @app.route('/download/xml')
 def download_xml():
     response = requests.get(f"https://api.thingspeak.com/channels/{CHANNEL_ID}/feeds.xml?days=30&api_key={READ_API_KEY}")
@@ -384,6 +464,7 @@ def download_csv():
         )
     else:
         return "Failed to fetch data", 500
+
 
 
 @app.route('/action/chauffage', methods=['POST'])
@@ -444,8 +525,29 @@ def deshumidificateurs():
     except Exception as e:
         return f"Erreur lors de la commutation du deshumidificateurs: {e}"
    
+@app.route('/set_humidity', methods=['POST'])
+def set_humidity():
+    data = request.get_json()
+    humidity = data.get('humidity')
+    with open('hum_set.txt', 'w') as file:
+        file.write(humidity)
+    return jsonify({'status': 'success'})
 
+@app.route('/clear_humidity', methods=['POST'])
+def clear_humidity():
+    open('hum_set.txt', 'w').close()
+    return jsonify({'status': 'success'})
 
+@app.route('/get_current_humidity')
+def get_current_humidity():
+    try:
+        with open('hum_set.txt', 'r') as file:
+            humidity = file.read().strip()
+            if not humidity:  # Si le fichier est vide, renvoyer "NA"
+                humidity = "NA"
+    except FileNotFoundError:
+        humidity = "NA"  # Si le fichier n'existe pas, renvoyer "NA"
+    return jsonify({'humidity': humidity})
 
 if __name__ == '__main__':
 
