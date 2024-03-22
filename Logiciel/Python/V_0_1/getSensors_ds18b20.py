@@ -6,8 +6,6 @@
                 Adaptation pour fonctionnalité UDP.
     @brief      Ce fichier permet de faire une lecture des capteurs ds18b20 connecter et d'attribuer cette valeur à une variable.
                 Ce fichier utilise la librairie "W1ThermSensor".
-    @Auteurs    Andy Van Flores Gonzalez, Loïc Sarhy
-    @compilateur interpreteur Python
 '''
 
 from w1thermsensor import W1ThermSensor # module 1-wire
@@ -22,7 +20,7 @@ def getDS18B20():
     '''
     global loadDS18B20, strDS18B20 # pour payload Thingspeak
     global temp1, temp2, temp3, temp4, tempUDP, tempMOY # labels températures
-
+    
     nombreDS18B20 = 0 #pour la numerotation (temp1, temp2 ...)
     strDS18B20 = '' #texte de la valeur des capteurs
     loadDS18B20 = ''
@@ -45,7 +43,7 @@ def getDS18B20():
             # formattage du field à envoyer
             if nombreDS18B20 == 1:
                 temp1 = temp
-                loadDS18B20 += "&field" + str(nombreDS18B20) + "=" + str(temp1) # champ pour thingspeak
+                loadDS18B20 += "&field" + str(nombreDS18B20) + "=" + str(temp1)
                 tempUDP[nombreDS18B20-1] = temp # champ pour udp
 
             elif nombreDS18B20 == 2:
@@ -69,10 +67,11 @@ def getDS18B20():
             # si aucun capteur?
             else:
                 print("erreur: aucun connecteurs connectés")
-        tempMOY = (temp1+temp2+temp3+temp4)/4
+            
+        tempMOY = round((temp1+temp2+temp3+temp4)/4 , syst_config.PRECISION)
     except:
         print("erreur strD")
         
-    print(strDS18B20 + '\n')
+    return temp1, temp2, temp3, temp4, tempUDP, tempMOY
     nombreDS18B20 = 0 #remise a zero de le numerotation des capteur
     
