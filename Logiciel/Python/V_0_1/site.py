@@ -9,6 +9,7 @@
     @Auteurs    Andy Van Flores Gonzalez, Loïc Sarhy
     @compilateur interpreteur Python
 '''
+
 from flask import Flask, render_template_string, jsonify, request, Response ,redirect
 import requests
 import json
@@ -27,7 +28,6 @@ READ_API_KEY = "M15BVTOEBCFHQL7K"
 @app.route('/', methods=['GET', 'POST'])
 def index():
     
-
     return render_template_string("""
 <!DOCTYPE html>
 <html lang="en">
@@ -55,6 +55,13 @@ def index():
                 font-size: 1.2em;
                 box-shadow: inset 0 0 10px #000;
             }
+            .input-value 
+            {
+                width: 20%; 
+                padding: 10px; 
+                margin: 5px 0; 
+                box-sizing: border-box; 
+            }                      
             .control-button span 
             {
                 margin-right: 10px;
@@ -178,14 +185,14 @@ def index():
                     <div class="tab-pane fade show active" id="FixedValues" role="tabpanel" aria-labelledby="fixed-values-tab">                  
                         <div class="temperature-set-section">
                             <h2>Définir la valeur de température</h2>
-                            <input type="number" id="temperatureValue" placeholder="Entrez la température en Celsius" step="0.01">
+                            <input type="number" id="temperatureValue" class="input-value" placeholder="Entrez la température en Celsius" step="0.01">
                             <button onclick="setTemperature()">Définir</button>
                             <button onclick="clearTemperature()">Effacer</button>
                             <p>Température actuelle définie : <span id="currentTemperature">NA</span>°C</p>
                         </div> 
                         <div class="humidity-set-section">
                             <h2>Définir la valeur d'humidité</h2>
-                            <input type="number" id="humidityValue" placeholder="Entrez l'humidité en pourcentage" min="0" max="100" step="0.01">
+                            <input type="number" id="humidityValue" class="input-value" placeholder="Entrez l'humidité en pourcentage" min="0" max="100" step="0.01">
                             <button onclick="setHumidity()">Définir</button>
                             <button onclick="clearHumidity()">Effacer</button>
                             <p>Humidité actuelle définie : <span id="currentHumidity">NA</span>%</p>
