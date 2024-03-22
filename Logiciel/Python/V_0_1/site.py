@@ -513,8 +513,7 @@ def ventilation():
 
 @app.route('/action/lumiere1', methods=['POST'])
 def lumiere1():
-    url = "http://10.42.0.130/cm?cmnd=Power%20toggle"
-       
+    url = "http://10.42.0.130/cm?cmnd=Power%20toggle"      
     try:
         response = requests.get(url)
        
@@ -523,10 +522,8 @@ def lumiere1():
         return f"Erreur lors de la commutation du Lumière: {e}"
  
 @app.route('/action/lumiere2', methods=['POST'])
-def lumiere2():
-    
-    url = "http://10.42.0.29/cm?cmnd=Power%20toggle"
-    
+def lumiere2(): 
+    url = "http://10.42.0.29/cm?cmnd=Power%20toggle"  
     try:
         response = requests.get(url)
         
