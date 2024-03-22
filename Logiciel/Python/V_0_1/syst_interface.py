@@ -73,7 +73,7 @@ def genAfficheCRIFA():
     lblInternet = initLabelValue(root, 6, syst_config.TKPOS_LEFT, syst_config.TKPOS_BOTTOM + syst_config.TKPOS_OFFSET) # width, pos x,y
 
     # Moyenne temperature
-    initLabel(root, "Temp. MOY (°C)", 14, "orange", syst_config.TKPOS_CENTER, syst_config.TKPOS_TOP) # text, width, couleur, pos x,y
+    initLabel(root, "Temp. MOY (°C)", 17, "orange", syst_config.TKPOS_CENTER, syst_config.TKPOS_TOP) # text, width, couleur, pos x,y
     lblMOY = initLabelValue(root, 6, syst_config.TKPOS_CENTER, syst_config.TKPOS_TOP + syst_config.TKPOS_OFFSET) # width, pos x,y 
 
     # CAPTEURS DS18B20
