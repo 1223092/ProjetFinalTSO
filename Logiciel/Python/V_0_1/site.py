@@ -447,6 +447,18 @@ def get_current_temperature():
         temperature = "NA"  # Si le fichier n'existe pas, renvoyer "NA"
     return jsonify({'temperature': temperature})
 
+@app.route('/set_temperature', methods=['POST'])
+def set_temperature():
+    data = request.get_json()
+    temperature = data.get('temperature')
+    with open('temp_set.txt', 'w') as file:
+        file.write(temperature)
+    return jsonify({'status': 'success'})
+
+@app.route('/clear_temperature', methods=['POST'])
+def clear_temperature():
+    open('temp_set.txt', 'w').close()
+    return jsonify({'status': 'success'})
 
 @app.route('/download/xml')
 def download_xml():
