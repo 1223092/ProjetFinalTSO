@@ -7,6 +7,6 @@
 #### Comprend le fichier texte explicant l'entièreté du projet.
 
 ### Materiel
-#### Comprend de la documentation sur tout les objets physiques utilisé.
+#### Comprend de la documentation sur tous les objets physiques utilisé.
 
         
