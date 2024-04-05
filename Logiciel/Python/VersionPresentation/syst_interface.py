@@ -1,6 +1,6 @@
 '''
     @file       syst_interface.py
-    @date       Mars 2022
+    @date       Avril 2024
     @version    0.1
                 Ajout de try/catch pour gérer les exceptions faites lors de la
                 récupération des données des capteurs lorsqu'ils sont absents.

@@ -1,6 +1,6 @@
 '''
     @file       getSensors_ds18b20.py
-    @date       Avril 2022
+    @date       Avril 2024
     @version    0.2
                 Ajout d'une autre condition s'il y a trop de capteurs ou aucun.
                 Adaptation pour fonctionnalité UDP.

@@ -1,6 +1,6 @@
 '''
     @file       syst_logique.py
-    @date       Avril 2022
+    @date       Avril 2024
     @version    0.1
                 Adaptation pour fonctionnalité UDP.
     @brief      Point d'entrée du programme. Ce fichier fichier permet d'exécuter les méthodes

@@ -1,6 +1,6 @@
 '''
     @file       syst_config.py
-    @date       Avril 2022
+    @date       Avril 2024
     @version    0.2
                 Adaptation pour code NFT
     @brief      Fichier des variables, contantes, etc. configurables.

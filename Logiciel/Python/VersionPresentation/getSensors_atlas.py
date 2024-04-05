@@ -1,6 +1,6 @@
 '''
     @file       getSensors_atlas.py
-    @date       Avril 2022
+    @date       Avril 2024
     @version    0.1
                 Adaptation pour fonctionnalité UDP.
     @brief      Ce fichier permet de faire une lecture des capteurs Atlas connecter et d'attribuer cette valeur à une variable.
