@@ -18,7 +18,7 @@ import getSensors_atlas # valeurs mesures Atlas
 #  ThingSpeak Channel Settings
 channelID = syst_config.CHANNELID # The ThingSpeak Channel ID 
 apiKey = syst_config.APIKEY # The Write API Key for the channel
-connectionStatus = False
+connectionStatusTS = False
 
 # Set up the connection parameters based on the connection type
 if syst_config.useUnsecuredTCP:
@@ -66,7 +66,7 @@ def push():
                         client_id=syst_config.MQTT_CLIENTID, auth={'username':syst_config.MQTT_USR,'password':syst_config.MQTT_PWD})
         #</>
         print ("Published"+"\n")
-        connectionStatus = True
+        connectionStatusTS = True
     except Exception as e:
         print ("There was an error while publishing the data.\nException: ", e)
-        connectionStatus = False
+        connectionStatusTS = False

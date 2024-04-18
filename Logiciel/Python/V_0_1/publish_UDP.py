@@ -83,8 +83,8 @@ def push():
         sock.sendto(bytes(json.dumps(jPayload), ENCODING), (Broadcast, Port2))
         print ("Published on UDP"+"\n")
         #time.sleep(10)
-        connectionStatus = True
+        connectionStatusUDP = True
     except:
         print ("There was an error while publishing the data.")
-        connectionStatus = False
+        connectionStatusUDP = False
         
