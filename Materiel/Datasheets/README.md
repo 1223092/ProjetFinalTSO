@@ -22,5 +22,5 @@
 ### Tentacle T3 interlink
 #### Fiche technique de la carte de développement afin de connecter les capteurs de la compagnie ATLAS SCIENTIFIQUE.
 
-### manquant
-#### Liste des fiches techniques manquantes.
+### Pi-Sample-code
+#### Documentation pour tester les différents type de communication.
