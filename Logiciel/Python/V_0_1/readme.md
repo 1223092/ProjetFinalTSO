@@ -57,7 +57,7 @@
     @brief      Fichier permettant d'envoyer les données des capteurs par UDP.
     @Auteurs    Andy Van Flores Gonzalez, Loïc Sarhy
     @compilateur interpreteur Python
-##### tab.py
+##### site.py
     @file       tab.py
     @date       Avril 2024
     @version    0.1

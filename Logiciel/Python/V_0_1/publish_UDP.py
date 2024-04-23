@@ -21,6 +21,7 @@ import requests
 
 
 ENCODING = "utf-8"
+connectionStatusUDP = False
 
 
 # Set up the connection parameters based on the connection type
@@ -82,7 +83,8 @@ def push():
         sock.sendto(bytes(json.dumps(jPayload), ENCODING), (Broadcast, Port2))
         print ("Published on UDP"+"\n")
         #time.sleep(10)
+        connectionStatusUDP = True
     except:
         print ("There was an error while publishing the data.")
-        
+        connectionStatusUDP = False
         

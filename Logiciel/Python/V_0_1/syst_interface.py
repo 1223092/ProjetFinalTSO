@@ -17,7 +17,8 @@ import getSensors_atlas # pour récupérer les valeurs des lectures Atlas
 import getSensors_ds18b20 # pour récupérer les valeurs des lecture 1-Wire
 import syst_config # fichier constantes <syst_config.py>
 import syst_logique
-import publish_ThingSpeak as status
+import publish_ThingSpeak as TSstatus
+import publish_UDP as UDPStatus
 
 def initLabel(pRoot, pText, pWidth, pFg, pPosX, pPosY):
     ''' Permet d'initialiser un objet tkinter label de titre.
@@ -172,7 +173,11 @@ def getValues():
         lblHUM.config(text='----')
     
     try:
-        lblInternet.config(text=(status.connectionStatus))   
+        if TSstatus.connectionStatusTS = True && UDPStatus.connectionStatusUPD = True
+        lblInternet.config(text=("ON"))
+        else
+        lblInternet.config(text=("OFF"))
+        
     except:
         lblInternet.config(text='----')
     
