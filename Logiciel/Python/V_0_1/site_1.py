@@ -1,15 +1,3 @@
-'''
-    @file       site.py
-    @date       Avril 2024
-    @version    0.1
-                Interface web.
-    @brief      Ce fichier comprend le page web
-                Il récupère les valeurs critiques pour la gestion des boucles de contrôle.
-                Gestion de la communication avec les prises intelligentes via le point d'accès WIFI.
-    @Auteurs    Andy Van Flores Gonzalez, Loïc Sarhy
-    @compilateur interpreteur Python
-'''
-
 from flask import Flask, render_template_string, jsonify, request, Response ,redirect
 import requests
 import json
@@ -37,6 +25,20 @@ def index():
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Serrebrooke</title>
         <style>
+                                  
+             .schedule-section, .timer-section {
+                margin-bottom: 20px;
+            }
+
+            .schedule-section div, .timer-section div {
+                margin-bottom: 10px;
+            }
+
+            input[type="number"], input[type="time"], select {
+                margin-right: 10px;
+                margin-bottom: 5px;
+            }
+                     
             .chart-row 
             {
                 display: flex;
@@ -135,11 +137,6 @@ def index():
         <div class="tab-content" id="myTabContent">                          
             <div class="tab-pane fade" id="Control" role="tabpanel" aria-labelledby="control-tab">
                 <div class="control-panel">
-                    <!-- Humidificateur -->
-                    <div class="control-button" onclick="toggleDeviceState('10.42.0.85', 'deshumidificateursState', 'action/deshumidificateurs')">
-                        <span class="control-icon">💧</span>
-                        Humidificateur:  <span id="deshumidificateursState" class="control-status"></span>
-                    </div>
 
                     <!-- Chauffage -->
                     <div class="control-button" onclick="toggleDeviceState('10.42.0.23', 'chauffageState', 'action/chauffage')">
@@ -147,18 +144,12 @@ def index():
                         Chauffage: <span id="chauffageState" class="control-status"></span>                
                     </div>
 
-                    <!-- Lumière 1 -->
+                    <!-- Lumière  -->
                     <div class="control-button" onclick="toggleDeviceState('10.42.0.130', 'lumiere1State', 'action/lumiere1')">
                         <span class="control-icon">💡</span>
-                        Lumière 1: <span id="lumiere1State" class="control-status"></span>
+                        Lumière : <span id="lumiere1State" class="control-status"></span>
                     </div>
-
-                    <!-- Lumière 2 -->
-                    <div class="control-button" onclick="toggleDeviceState('10.42.0.29', 'lumiere2State', 'action/lumiere2')">
-                        <span class="control-icon">💡</span>
-                        Lumière 2: <span id="lumiere2State" class="control-status"></span>
-                    </div>
-
+             
                     <!-- Ventilation -->
                     <div class="control-button" onclick="toggleDeviceState('10.42.0.88', 'ventilationState', 'action/ventilation')">
                         <span class="control-icon">🌀</span>
@@ -180,25 +171,110 @@ def index():
                     <li class="nav-item" role="presentation">
                         <button class="nav-link active" id="fixed-values-tab" data-bs-toggle="tab" data-bs-target="#FixedValues" type="button" role="tab" aria-controls="FixedValues" aria-selected="true">Valeurs Fixes</button>
                     </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="timing-programmation-tab" data-bs-toggle="tab" data-bs-target="#TimingProgrammation" type="button" role="tab" aria-controls="TimingProgrammation" aria-selected="false">Horaires</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="timers-tab" data-bs-toggle="tab" data-bs-target="#Timers" type="button" role="tab" aria-controls="Timers" aria-selected="false">Minuteries</button>
+                    </li>              
                 </ul>
                 <div class="tab-content" id="innerTabContent">
-                    <div class="tab-pane fade show active" id="FixedValues" role="tabpanel" aria-labelledby="fixed-values-tab">                  
-                        <div class="temperature-set-section">
-                            <h2>Définir la valeur de température</h2>
-                            <input type="number" id="temperatureValue" class="input-value" placeholder="Entrez la température en Celsius" step="0.01">
-                            <button onclick="setTemperature()">Définir</button>
-                            <button onclick="clearTemperature()">Effacer</button>
-                            <p>Température actuelle définie : <span id="currentTemperature">NA</span>°C</p>
-                        </div> 
-                        <div class="humidity-set-section">
-                            <h2>Définir la valeur d'humidité</h2>
-                            <input type="number" id="humidityValue" class="input-value" placeholder="Entrez l'humidité en pourcentage" min="0" max="100" step="0.01">
-                            <button onclick="setHumidity()">Définir</button>
-                            <button onclick="clearHumidity()">Effacer</button>
-                            <p>Humidité actuelle définie : <span id="currentHumidity">NA</span>%</p>
-                        </div>           
-                    </div>               
-                </div>                                                                                                                        
+                        <div class="tab-pane fade show active" id="FixedValues" role="tabpanel" aria-labelledby="fixed-values-tab">                  
+                            <div class="temperature-set-section">
+                                <h2>Définir la valeur de température</h2>
+                                <input type="number" id="temperatureValue" class="input-value" placeholder="Entrez la température en Celsius" step="0.01">
+                                <button onclick="setTemperature()">Définir</button>
+                                <button onclick="clearTemperature()">Effacer</button>
+                                <p>Température actuelle définie : <span id="currentTemperature">NA</span>°C</p>
+                            </div> 
+                            <div class="humidity-set-section">
+                                <h2>Définir la valeur d'humidité</h2>
+                                <input type="number" id="humidityValue" class="input-value" placeholder="Entrez l'humidité en pourcentage" min="0" max="100" step="0.01">
+                                <button onclick="setHumidity()">Définir</button>
+                                <button onclick="clearHumidity()">Effacer</button>
+                                <p>Humidité actuelle définie : <span id="currentHumidity">NA</span>%</p>
+                            </div>           
+                        </div>               
+                     
+                    <div class="tab-pane fade" id="TimingProgrammation" role="tabpanel" aria-labelledby="timing-programmation-tab">
+                        <div class="schedule-section">
+                            <h2>Programmer les horaires</h2>
+                               
+                            <div>
+                                <label for="lumiereStartTime">Heure de démarrage Lumière:</label>
+                                <input type="time" id="lumiereStartTime">
+                                <label for="lumiereEndTime">Heure de fin Lumière:</label>
+                                <input type="time" id="lumiereEndTime">
+                                <button onclick="setSchedule('lumiere')">Définir horaires</button>
+                                <button onclick="clearSchedule('lumiere')">Effacer horaires</button>            
+                            </div>  
+                                  
+                            <div>
+                                <label for="chauffageStartTime">Heure de démarrage Chauffage:</label>
+                                <input type="time" id="chauffageStartTime">
+                                <label for="chauffageEndTime">Heure de fin Chauffage:</label>
+                                <input type="time" id="chauffageEndTime">
+                                <button onclick="setSchedule('chauffage')">Définir horaires</button>
+                                <button onclick="clearSchedule('chauffage')">Effacer horaires</button>
+                            </div>
+                            <div>
+                                <label for="ventilationStartTime">Heure de démarrage Ventilation:</label>
+                                <input type="time" id="ventilationStartTime">
+                                <label for="ventilationEndTime">Heure de fin Ventilation:</label>
+                                <input type="time" id="ventilationEndTime">
+                                <button onclick="setSchedule('ventilation')">Définir horaires</button>
+                                <button onclick="clearSchedule('ventilation')">Effacer horaires</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="Timers" role="tabpanel" aria-labelledby="timers-tab">
+                        <div class="timer-section">
+                            <h2>Programmer les minuteries</h2>
+                            <div>
+                                <label for="lightTimer">Minuterie Lumière :</label>
+                                <label for="lumiereHours">H:</label>
+                                <input type="number" id="lumiereHours" min="0" placeholder="0" style="width: 50px;">
+                                <label for="lumiereMinutes">M:</label>
+                                <input type="number" id="lumiereMinutes" min="0" placeholder="0" style="width: 50px;">
+                                <label for="lumiereSeconds">S:</label>
+                                <input type="number" id="lumiereSeconds" min="0" placeholder="0" style="width: 50px;">
+                                <select id="lumiereAction">
+                                    <option value="open">Ouvrir</option>
+                                    <option value="close">Fermer</option>
+                                </select>
+                                <button onclick="setTimer('lumiere')">Définir minuterie</button>
+                            </div>
+                            <div>
+                                <label for="chauffageTimer">Minuterie Chauffage :</label>
+                                <label for="chauffageHours">H:</label>
+                                <input type="number" id="chauffageHours" min="0" placeholder="0" style="width: 50px;">
+                                <label for="chauffageMinutes">M:</label>
+                                <input type="number" id="chauffageMinutes" min="0" placeholder="0" style="width: 50px;">
+                                <label for="chauffageSeconds">S:</label>
+                                <input type="number" id="chauffageSeconds" min="0" placeholder="0" style="width: 50px;">
+                                <select id="chauffageAction">
+                                    <option value="open">Ouvrir</option>
+                                    <option value="close">Fermer</option>
+                                </select>
+                                <button onclick="setTimer('chauffage')">Définir minuterie</button>
+                            </div>
+                            <div>
+                                <label for="ventilationTimer">Minuterie Ventilation :</label>
+                                <label for="ventilationHours">H:</label>
+                                <input type="number" id="ventilationHours" min="0" placeholder="0" style="width: 50px;">
+                                <label for="ventilationMinutes">M:</label>
+                                <input type="number" id="ventilationMinutes" min="0" placeholder="0" style="width: 50px;">
+                                <label for="ventilationSeconds">S:</label>
+                                <input type="number" id="ventilationSeconds" min="0" placeholder="0" style="width: 50px;">
+                                <select id="ventilationAction">
+                                    <option value="open">Ouvrir</option>
+                                    <option value="close">Fermer</option>
+                                </select>
+                                <button onclick="setTimer('ventilation')">Définir minuterie</button>
+                            </div>
+                        </div>
+                    </div>  
+                </div>                                                                                                                                                         
             </div>                      
             <div class="tab-pane fade show active" id="Dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
                 <div class="row">
@@ -288,6 +364,56 @@ def index():
                 })
                 .catch(error => console.error('Erreur:', error));
         }
+                                  
+        function setSchedule(device) {
+            var start = document.getElementById(device + 'StartTime').value;
+            var end = document.getElementById(device + 'EndTime').value;
+            fetch('/set_schedule/' + device, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ start: start, end: end }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Schedule set:', data);
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        function clearSchedule(device) {
+            fetch('/clear_schedule/' + device, {
+                method: 'POST',
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Schedule cleared:', data);
+                document.getElementById(device + 'StartTime').value = '';
+                document.getElementById(device + 'EndTime').value = '';
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        function fetchSchedule(device) {
+            fetch('/get_schedule/' + device)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.start !== 'NA') {
+                        document.getElementById(device + 'StartTime').value = data.start;
+                    }
+                    if (data.end !== 'NA') {
+                        document.getElementById(device + 'EndTime').value = data.end;
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        document.getElementById('programming-tab').addEventListener('click', function() {
+            fetchSchedule('lumiere');
+            fetchSchedule('chauffage');
+            fetchSchedule('ventilation');
+        });                          
 
         document.getElementById('programming-tab').addEventListener('click', fetchCurrentHumidity);
 
@@ -401,11 +527,8 @@ def index():
         {
             fetchState('10.42.0.23', 'chauffageState');
             fetchState('10.42.0.88', 'ventilationState');
-            fetchState('10.42.0.130', 'lumiere1State');
-            fetchState('10.42.0.29', 'lumiere2State');
-            fetchState('10.42.0.85', 'deshumidificateursState');
-        }
-        setInterval(updateStates, 1000);  
+            fetchState('10.42.0.130', 'lumiere1State');       
+        }     
     </script>                                                              
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>                                 
 </body>
@@ -460,6 +583,35 @@ def clear_temperature():
     open('temp_set.txt', 'w').close()
     return jsonify({'status': 'success'})
 
+@app.route('/set_schedule/<device>', methods=['POST'])
+def set_schedule(device):
+    data = request.get_json()
+    start_time = data.get('start')
+    end_time = data.get('end')
+    schedule_file = f'{device}_schedule.txt'
+    with open(schedule_file, 'w') as file:
+        file.write(f"{start_time},{end_time}")
+    return jsonify({'status': 'success'})
+
+@app.route('/clear_schedule/<device>', methods=['POST'])
+def clear_schedule(device):
+    schedule_file = f'{device}_schedule.txt'
+    open(schedule_file, 'w').close()
+    return jsonify({'status': 'success'})
+
+@app.route('/get_schedule/<device>')
+def get_schedule(device):
+    schedule_file = f'{device}_schedule.txt'
+    try:
+        with open(schedule_file, 'r') as file:
+            schedule = file.read().strip().split(',')
+            if len(schedule) != 2:
+                return jsonify({'start': 'NA', 'end': 'NA'})
+            return jsonify({'start': schedule[0], 'end': schedule[1]})
+    except FileNotFoundError:
+        return jsonify({'start': 'NA', 'end': 'NA'})
+
+
 @app.route('/download/xml')
 def download_xml():
     response = requests.get(f"https://api.thingspeak.com/channels/{CHANNEL_ID}/feeds.xml?days=30&api_key={READ_API_KEY}")
@@ -502,44 +654,32 @@ def chauffage():
 
 @app.route('/action/ventilation', methods=['POST'])
 def ventilation():
-    
-    url = "http://10.42.0.88/cm?cmnd=Power%20toggle"
+
+    data = request.get_json()
+    ip = data.get('ip')
+    url = f"http://{ip}/cm?cmnd=Power%20toggle"
     try:
-        response = requests.get(url)
-        return f"Chauffage commuté. Status: {response.status_code}"
+        response = requests.get(url)       
+        newState = response.json().get('POWER')
+        return jsonify({'state': newState})
     except Exception as e:
-        return f"Erreur lors de la commutation du chauffage: {e}"
+        return jsonify({'error': str(e)}), 500
+
    
 
 @app.route('/action/lumiere1', methods=['POST'])
 def lumiere1():
-    url = "http://10.42.0.130/cm?cmnd=Power%20toggle"      
+    data = request.get_json()
+    ip = data.get('ip')
+    url = f"http://{ip}/cm?cmnd=Power%20toggle"    
     try:
-        response = requests.get(url)
-       
-        return f"Lumière commuté. Status: {response.status_code}"
+        response = requests.get(url)       
+        newState = response.json().get('POWER')
+        return jsonify({'state': newState})
     except Exception as e:
-        return f"Erreur lors de la commutation du Lumière: {e}"
+        return jsonify({'error': str(e)}), 500
+
  
-@app.route('/action/lumiere2', methods=['POST'])
-def lumiere2(): 
-    url = "http://10.42.0.29/cm?cmnd=Power%20toggle"  
-    try:
-        response = requests.get(url)
-        
-        return f"Lumière commuté. Status: {response.status_code}"
-    except Exception as e:
-        return f"Erreur lors de la commutation du Lumière: {e}"
- 
- 
-@app.route('/action/deshumidificateurs', methods=['POST'])
-def deshumidificateurs():
-    url = "http://10.42.0.85/cm?cmnd=Power%20toggle"
-    try:
-        response = requests.get(url)
-        return f"deshumidificateurs commuté. Status: {response.status_code}"
-    except Exception as e:
-        return f"Erreur lors de la commutation du deshumidificateurs: {e}"
    
 @app.route('/set_humidity', methods=['POST'])
 def set_humidity():
