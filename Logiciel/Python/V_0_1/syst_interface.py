@@ -144,19 +144,19 @@ def getValues():
     # si le capteur est inexistant, une exception est lancée, donc on affiche
     # à la place "----" pour indiquer qu'il est absent. 
     try:
-        lblDS1.config(text=str(getSensors_ds18b20.temp1))
+        lblDS1.config(text=str(getSensors_ds18b20.tabSenortemp[0]))
     except:
         lblDS1.config(text='----')
     try:
-        lblDS2.config(text=str(getSensors_ds18b20.temp2))
+        lblDS2.config(text=str(getSensors_ds18b20.tabSenortemp[1]))
     except:
         lblDS2.config(text='----')
     try:
-        lblDS3.config(text=str(getSensors_ds18b20.temp3))
+        lblDS3.config(text=str(getSensors_ds18b20.tabSenortemp[2]))
     except:
         lblDS3.config(text='----')
     try:
-        lblDS4.config(text=str(getSensors_ds18b20.temp4))
+        lblDS4.config(text=str(getSensors_ds18b20.tabSenortemp[3]))
     except:
         lblDS4.config(text='----')
     try:
@@ -173,10 +173,10 @@ def getValues():
         lblHUM.config(text='----')
     
     try:
-        if TSstatus.connectionStatusTS = True && UDPStatus.connectionStatusUPD = True
-        lblInternet.config(text=("ON"))
-        else
-        lblInternet.config(text=("OFF"))
+        if (TSstatus.connectionStatusTS == True) and (UDPStatus.connectionStatusUPD == True) :
+            lblInternet.config(text=("ON"))
+        else :
+            lblInternet.config(text=("OFF"))
         
     except:
         lblInternet.config(text='----')
