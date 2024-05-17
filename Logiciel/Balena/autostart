@@ -6,5 +6,4 @@
 
 
 python3 /root/app-serrebrooke/syst_logique.py
-python3 /root/app-serrebrooke/site_1.py
-python3 /root/app-serrebrooke/boucle_control.py
+python3 /root/app-serrebrooke/site_final.py

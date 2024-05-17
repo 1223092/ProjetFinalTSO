@@ -4,6 +4,9 @@ ENV TZ="America/Montreal"
 
 RUN apt -y update && apt -y upgrade
 
+# Install Node.js and npm
+
+
 # Install desktop environment
 RUN install_packages xserver-xorg-core \
     xinit lxsession desktop-file-utils \
@@ -13,8 +16,10 @@ RUN install_packages xserver-xorg-core \
 	git python3-tk thonny python3-pip \
 	xterm python-smbus i2c-tools
 
+
+
 # installation packages serrebrooke
-RUN pip3 install tk atlas-i2c w1thermsensor schedule paho-mqtt requests psutil flask rpi.gpio flask_sqlalchemy
+RUN pip3 install tk atlas-i2c w1thermsensor schedule paho-mqtt requests psutil flask rpi.gpio flask_sqlalchemy w1thermsensor plotly Pillow pip
 
 
 RUN mkdir -p /root/app-serrebrooke/
@@ -40,4 +45,4 @@ COPY autostart /etc/xdg/lxsession/LXDE-pi/autostart
 
 ENV UDEV=1
 
-CMD ["bash", "start.sh","node", "/root/app-serrebrooke/index.js"] && modprobe w1-gpio && modprobe w1-them && modprobe i2c-dev
+CMD ["bash", "start.sh" ] && modprobe w1-gpio && modprobe w1-them && modprobe i2c-dev
