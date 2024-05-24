@@ -11,7 +11,7 @@
     qui agit comme broker. Le programme déploye aussi une page web à partir de laquelle des consignes
     peuvent être choisi afin de controler les différents instruments HVAC qui permet d'avoir les
     conditions demanés à l'intérieur de l'environment ou le système est installé.
-    Version présentation qui ne gêre que deux prise intelligentes.
+    Version présentation qui ne gêre que deux prises intelligentes.
 </p>
 
 ## Matériel
