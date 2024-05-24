@@ -1,10 +1,13 @@
 '''
     @file       publish_UDP.py
     @author     equipe-projet-peridoseur
-    @date       Avril 2022
+    @date       Avril 2024
     @version    0.2
                 Adaptation pour capteurs DS18B20 multiples.
     @brief      Fichier permettant d'envoyer les données des capteurs par UDP.
+    
+    @Auteurs    Andy Van Flores Gonzalez, Loïc Sarhy
+    @compilateur interpreteur Python
 '''
 
 

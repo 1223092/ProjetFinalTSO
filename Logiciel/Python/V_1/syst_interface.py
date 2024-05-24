@@ -1,17 +1,21 @@
 '''
     @file       syst_interface.py
-    @date       Mars 2022
+    @date       Mars 2024
     @version    0.1
                 Ajout de try/catch pour gérer les exceptions faites lors de la
                 récupération des données des capteurs lorsqu'ils sont absents.
                 
     @brief      Fichier du programme pour l'interface physique. Permet de définir
                 les fonctions pour sa construction et de récupérer les valeurs des
-                lectures de capteurs pour actualiser l'affichage.
+                lectures de capteurs pour actualiser l'affichage et des autres informations importantes.
+    
+    @Auteurs    Andy Van Flores Gonzalez, Loïc Sarhy
+    @compilateur interpreteur Python
 '''
 from time import sleep # pour fonction sleep()
 from tkinter import PhotoImage, Label
 import tkinter as tk # module pour affichage
+
 import getSensors_atlas # pour récupérer les valeurs des lectures Atlas
 import getSensors_ds18b20 # pour récupérer les valeurs des lecture 1-Wire
 import syst_config # fichier constantes <syst_config.py>

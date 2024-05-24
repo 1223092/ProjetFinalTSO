@@ -1,16 +1,24 @@
 '''
     @file       syst_logique.py
-    @date       Avril 2022
+    @date       Avril 2024
     @version    0.1
-                Adaptation pour fonctionnalité UDP.
+                
     @brief      Point d'entrée du programme. Ce fichier fichier permet d'exécuter les méthodes
-                appartenant aux autres fichiers du répertoire.
+                appartenant aux autres fichiers du répertoire. C'est à partir de ce fichier que la demade de prises de mesures et 
+                les evoyes de données sont effectués.
+                données sont
+
+    @Auteurs    Andy Van Flores Gonzalez, Loïc Sarhy
+    @compilateur interpreteur Python
 '''
 #!/bin/python3
 
 import time
 from datetime import datetime # module pour le temps
 import schedule # module pour événement pushRoutine()
+import socket
+import threading
+
 # Fichiers de programmes pour projet Serrebrooke
 import syst_config # Fichier des variables, contantes, etc. configurables. Permet de modifier les valeurs sans affecter la logique du code.
 import syst_interface # Fichier pour l'affichage physique
@@ -18,9 +26,8 @@ import getSensors_ds18b20 # Fichier pour mesures 1-Wire
 import getSensors_atlas # Fichier pour mesures Atlas
 import publish_ThingSpeak # Fichier pour publié les données sur Thingspeak
 import publish_UDP # Fichier pour publié les données par UDP (Complémentaire avec projet Péridoseur)
-import socket
 from boucle_finale import main_loop
-import threading
+
 
 global internet
 

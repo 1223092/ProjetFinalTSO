@@ -18,7 +18,7 @@ useUnsecuredTCP = False             # Set useUnsecuredTCP to True to use the def
 useUnsecuredWebsockets = True       # Set useUnsecuredWebSockets to True to use MQTT over an unsecured websocket on port 80.
                                     # Try this if port 1883 is blocked on your network.
 useSSLWebsockets = False            # Set useSSLWebsockets to True to use MQTT over a secure websocket on port 443.
-MQTTHOST = "mqtt3.thingspeak.com"    # The Hostname of the ThinSpeak MQTT service
+MQTTHOST = "mqtt3.thingspeak.com"   # The Hostname of the ThinSpeak MQTT service
 
 ## Publish PLC
 # UDP Connection
@@ -26,7 +26,7 @@ useUnsecuredUDP = True
 
 # Fréquence d'acquisition
 tkiDelay = 2 # délai par défaut de l'aquisition des mesures
-tsDelay = 5 # delai d'intervalle au minutes pour envoyer les donnees sur thingspeak
+tsDelay = 5 # delai d'intervalle pour envoyer les donnees sur thingspeak
 
 # Mesures
 PRECISION = 1 # précision décimale, nombres de décimales

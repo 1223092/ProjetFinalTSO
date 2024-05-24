@@ -1,3 +1,16 @@
+'''
+    @file       site_final.py
+    @date       Mai 2024
+    @version    0.1
+                
+    @brief      Fichier contentant tout les parties du site de contrôle.
+                Les styles css utilisé.
+                Toute la strucutre html.
+                Les méthodes pour intéragir avec le systèmes.
+    
+    @Auteurs    Andy Van Flores Gonzalez, Loïc Sarhy
+    @compilateur interpreteur Python     
+'''
 from flask import Flask, render_template_string, jsonify, request, Response ,redirect
 import requests
 import json

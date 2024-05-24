@@ -1,3 +1,13 @@
+'''
+    @file       boucle_finale.py
+    @date       Mai 2024
+    @version    0.1
+                
+    @brief      Fichier python contenant les boucles controlant l'activation des systèmes de contrôle environnementales
+                de la serre selon les commandes demandés depuis le site web.
+    @Auteurs    Andy Van Flores Gonzalez, Loïc Sarhy
+    @compilateur interpreteur Python      
+'''
 import requests
 import time
 from datetime import datetime
@@ -18,15 +28,15 @@ HUMIDIFICATEUR_URL = "http://10.42.0.85/cm?cmnd=Power%20"
 SETTINGS_FILE = '/root/app-serrebrooke/control_settings.json'
 
 
-
+# Methode qui récupère les paramètres principales..................................
 def load_settings():
-    """ Load settings from a JSON file. """
     try:
         with open(SETTINGS_FILE, 'r') as f:
             return json.load(f)
     except FileNotFoundError:
         return initialize_default_settings()
-    
+
+# Methode qui initialise et retourne les paramètres par défault si le fichier de confiugrations est introuvable.    
 def initialize_default_settings():
     """ Initialize and return default settings if file is not found. """
     default_settings = {
@@ -40,19 +50,20 @@ def initialize_default_settings():
     return default_settings    
 
 
+# Methode qui envoie la commande à la prise intelligente.
 def control_device(url, command):
-    """ Envoie une commande à l'appareil via Tasmota. """
     try:
         response = requests.get(url + command)
         return response.json()
     except requests.RequestException as e:
         print(f"Erreur de connexion: {e}")
 
+# Méthode qui vérifie si l'heure actuelle est dans l'intervalle spécifié.
 def check_time_in_range(start, end, current):
-    """ Vérifie si l'heure actuelle est dans l'intervalle spécifié. """
     current_time = current.time()
     return start <= current_time <= end
 
+# Méthode qui permet de sélectionner des durées de temps pour le contrôle intermittent de la ventilation.
 def timer_control(url, timer_on, timer_off, active_check):
     
     while True:
@@ -65,6 +76,8 @@ def timer_control(url, timer_on, timer_off, active_check):
         control_device(url, "off")
         time.sleep(timer_off * 60) 
 
+# Méthode principale qui récupère les données de contrôle et qui les appliquent aux systèmes
+# selon les paramètres demandés.
 def main_loop():
     timer_threads = {}
 
@@ -79,6 +92,7 @@ def main_loop():
         getSensors_atlas.getAtlas()
         humVal = float(getSensors_atlas.humVal)
 
+        # Deadband : valeur de chevauchement par rapport aux valeurs demandés.
         temp_deadband = settings.get('chauffage', {}).get('tempDeadband', 2)  
         vent_deadband = settings.get('ventilation', {}).get('ventDeadband', 5)   
         hum_Deadband = settings.get('humidificateur', {}).get('humDeadband', 5)
@@ -134,7 +148,7 @@ def main_loop():
                 
                 timer_threads['ventilation'].join()
                           
-
+        # Gestion de l'humidité
         if settings['humidificateur']['schedule_active']:
             start = datetime.strptime(settings['humidificateur']['schedule']['start'], '%H:%M').time()
             end = datetime.strptime(settings['humidificateur']['schedule']['end'], '%H:%M').time()

@@ -1,10 +1,13 @@
 '''
     @file       syst_config.py
-    @date       Avril 2022
+    @date       Avril 2024
     @version    0.2
-                Adaptation pour code NFT
+                
     @brief      Fichier des variables, contantes, etc. configurables.
                 Permet de modifier les valeurs sans affecter la logique du code.
+                
+    @Auteurs    Andy Van Flores Gonzalez, Loïc Sarhy
+    @compilateur interpreteur Python
 '''
 
 
