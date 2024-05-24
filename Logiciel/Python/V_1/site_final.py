@@ -11,16 +11,12 @@
     @Auteurs    Andy Van Flores Gonzalez, Loïc Sarhy
     @compilateur interpreteur Python     
 '''
+#Librairies Python
 from flask import Flask, render_template_string, jsonify, request, Response ,redirect
 import requests
 import json
 import xml.etree.ElementTree as ET
-import csv
-import threading
-import time
-import os
-#import getSensors_ds18b20 
-#import getSensors_atlas 
+
 
 app = Flask(__name__)
 #SETTINGS_FILE = 'control_settings.json'

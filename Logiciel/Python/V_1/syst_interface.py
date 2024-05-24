@@ -12,10 +12,11 @@
     @Auteurs    Andy Van Flores Gonzalez, Loïc Sarhy
     @compilateur interpreteur Python
 '''
+#Librairies Python
 from time import sleep # pour fonction sleep()
-from tkinter import PhotoImage, Label
 import tkinter as tk # module pour affichage
 
+# Fichiers du programme Serrebrooke
 import getSensors_atlas # pour récupérer les valeurs des lectures Atlas
 import getSensors_ds18b20 # pour récupérer les valeurs des lecture 1-Wire
 import syst_config # fichier constantes <syst_config.py>

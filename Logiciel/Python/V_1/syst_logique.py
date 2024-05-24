@@ -13,13 +13,14 @@
 '''
 #!/bin/python3
 
+#Librairies Python
 import time
 from datetime import datetime # module pour le temps
 import schedule # module pour événement pushRoutine()
 import socket
 import threading
 
-# Fichiers de programmes pour projet Serrebrooke
+# Fichiers du programme Serrebrooke
 import syst_config # Fichier des variables, contantes, etc. configurables. Permet de modifier les valeurs sans affecter la logique du code.
 import syst_interface # Fichier pour l'affichage physique
 import getSensors_ds18b20 # Fichier pour mesures 1-Wire

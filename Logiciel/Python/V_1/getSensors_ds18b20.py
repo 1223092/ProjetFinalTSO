@@ -9,8 +9,10 @@
     @Auteurs    Andy Van Flores Gonzalez, Loïc Sarhy
     @compilateur interpreteur Python
 '''
-
+#Librairies Python
 from w1thermsensor import W1ThermSensor # module 1-wire
+
+# Fichiers du programme Serrebrooke
 import syst_config # Fichier des variables, contantes, etc. configurables. Permet de modifier les valeurs sans affecter la logique du code.
 
 def getDS18B20():

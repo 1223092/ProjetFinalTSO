@@ -9,9 +9,11 @@
     @Auteurs    Andy Van Flores Gonzalez, Loïc Sarhy
     @compilateur interpreteur Python
 '''
-
+#Librairies Python
 from atlas_i2c import atlas_i2c # module pour capteurs Atlas
 import time # module pour sleep
+
+# Fichiers du programme Serrebrooke
 import syst_config # Fichier des variables, contantes, etc. configurables. Permet de modifier les valeurs sans affecter la logique du code.
 
 #création de objets atlas

@@ -1,69 +1,50 @@
-# Répertoire du programme du serveur d'acquisitions
 
-## Description des fichiers
-### Notes
-#### Dernière révision des fichiers
-    @date   2023-12-22
-###### syst_config.py
-    @file       syst_config.py
-    @date       Avril 2024
-    @version    0.2
-                
-    @brief      Fichier des variables, contantes, etc. configurables.
-                Permet de modifier les valeurs sans affecter la logique du code.
-    @Auteurs    Andy Van Flores Gonzalez, Loïc Sarhy
-    @compilateur interpreteur Python
-###### syst_logique.py
-    @file       syst_logique.py
-    @date       Avril 2024
-    @version    0.1
-                Adaptation pour fonctionnalité UDP.
-    @brief      Point d'entrée du programme. Ce fichier fichier permet d'exécuter les méthodes
-                appartenant aux autres fichiers du répertoire.
-    @Auteurs    Andy Van Flores Gonzalez, Loïc Sarhy
-    @compilateur interpreteur Python
-###### syst_interface.py
-    @file       syst_interface.py
-    @date       Janvier 2024
-    @version    0.0 : Première version
-    @brief      Fichier du programme pour l'interface physique. Permet de définir
-                les fonctions pour sa construction.
-    @Auteurs    Andy Van Flores Gonzalez, Loïc Sarhy
-    @compilateur interpreteur Python
-###### getSensors_atlas.py
-    @file       getSensors_ds18b20.py
-    @date       Avril 2024
-    @version    0.2
-                Ajout d'une autre condition s'il y a trop de capteurs ou aucun.
-                Adaptation pour fonctionnalité UDP.
-    @brief      Ce fichier permet de faire une lecture des capteurs ds18b20 connecter et d'attribuer cette valeur à une variable.
-                Ce fichier utilise la librairie "W1ThermSensor".
-    @Auteurs    Andy Van Flores Gonzalez, Loïc Sarhy
-    @compilateur interpreteur Python
-###### publish_ThingSpeak.py
-    @file       publish_ThingSpeak.py
-    @date       Avril 2024
-    @version    0.1
-                Adaptation pour fonctionnalité UDP.
-    @brief      Fichier permettant d'envoyer les données vers ThingSpeak.
-    @Auteurs    Andy Van Flores Gonzalez, Loïc Sarhy
-    @compilateur interpreteur Python
-###### publish_UDP.py
-    @file       publish_UDP.py
-    @author     equipe-projet-peridoseur
-    @date       Avril 2024
-    @version    0.1
-                Adaptation pour capteurs DS18B20 multiples.
-    @brief      Fichier permettant d'envoyer les données des capteurs par UDP.
-    @Auteurs    Andy Van Flores Gonzalez, Loïc Sarhy
-    @compilateur interpreteur Python
-##### tab.py
-    @file       tab.py
-    @date       Avril 2024
-    @version    0.1
-                Interface web.
-    @brief      Ce fichier comprend le page web
-                Il récupère les valeurs critiques pour la gestion des boucles de contrôle.
-                Gestion de la communication avec les prises intelligentes via le point d'accès WIFI.
-    @Auteurs    Andy Van Flores Gonzalez, Loïc Sarhy
-    @compilateur interpreteur Python
+# V_2
+<p>Programme pour le projet Serrebrooke. Version présentation (soirée entreprenarial et expo-tech<p>
+<p>Version 2.0<p>
+<p>7 mai 2024<p>
+<p>Andy Van Flores Gomez et Loïc Sarhy<p>
+
+## Resume
+<p> Programme qui permet de recolter des données de différents appareils de mesures, généralement
+    installé dans une serre. Celles-ci sont envoyés par MQTT et récoltés par la plateforme Thingspeak
+    qui agit comme broker. Le programme déploye aussi une page web à partir de laquelle des consignes
+    peuvent être choisi afin de controler les différents instruments HVAC qui permet d'avoir les
+    conditions demanés à l'intérieur de l'environment ou le système est installé.
+    Version présentation qui ne gêre que deux prise intelligentes.
+</p>
+
+## Matériel
+### Fichiers
+<ul>
+<li>scripts.js</li>
+<li>styles.css</li>
+<li>index.html</li>
+<li>boucle_finale.py</li>
+<li>getSensors_atlas.py</li>
+<li>getSensors_ds18b20.py</li>
+<li>publish_ThingSpeak.py</li>
+<li>publish_UDP.py</li>
+<li>site_final.py</li>
+<li>syst_config.py</li>
+<li>syst_interface.py</li>
+<li>syst_logique.py</li>
+</ul>
+
+### Environnement
+<ul>
+<li>Utilisation de l'éditeur VScode pour le développement en python.</li>
+<li>Interpreteur python.</li>
+<li>Déployer dans un RaspberriePI</li>
+<li>Déployer via un conteneur Balena</li>
+</ul>
+
+## Utilisation
+<ul> 
+    <li>S'assurer d'avoir les fichiers dans le même répertoire.</li>
+    <li>Ouvrir et démarrer le fichier syst_logique.py.</li>
+    <li>Les instructions sur les touches disponibles se trouve au début du fichier carrier.py </li>
+</ul>
+<p>Le fichier va démarrer la prise de mesures de capteurs, affichage à l'écran local, l'envoie des données par
+    MQTT et la page web. Cette dernière sera accessible via un URL disponible par Balena.
+</p>

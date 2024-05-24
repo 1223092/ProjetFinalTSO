@@ -3,18 +3,19 @@
     @date       Mai 2024
     @version    0.1
                 
-    @brief      Fichier python contenant les boucles controlant l'activation des systèmes de contrôle environnementales
+    @brief      Fichier du programme contenant les boucles controlant l'activation des systèmes de contrôle environnementales
                 de la serre selon les commandes demandés depuis le site web.
     @Auteurs    Andy Van Flores Gonzalez, Loïc Sarhy
     @compilateur interpreteur Python      
 '''
+#Librairies Python
 import requests
 import time
 from datetime import datetime
 import json
 import threading
 
-# Importation des modules pour obtenir les données de capteurs
+# Fichiers du programme Serrebrooke
 import getSensors_ds18b20
 import getSensors_atlas
 

@@ -9,13 +9,12 @@
     @Auteurs    Andy Van Flores Gonzalez, Loïc Sarhy
     @compilateur interpreteur Python
 '''
-
+#Librairies Python
 import paho.mqtt.publish as publish # module pour publié par MQTT
 import psutil # proposé avec référence thingspeak
 
-
-import syst_config  # Fichier des variables, contantes, etc. configurables. 
-                    # Permet de modifier les valeurs sans affecter la logique du code.
+# Fichiers du programme Serrebrooke
+import syst_config  # Fichier des variables, contantes, etc. configurables. Permet de modifier les valeurs sans affecter la logique du code.
 import getSensors_ds18b20 # valeurs température DS18B20
 import getSensors_atlas # valeurs mesures Atlas
 
