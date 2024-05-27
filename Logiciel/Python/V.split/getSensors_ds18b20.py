@@ -1,14 +1,18 @@
 '''
     @file       getSensors_ds18b20.py
-    @date       Avril 2022
+    @date       Avril 2024
     @version    0.2
                 Ajout d'une autre condition s'il y a trop de capteurs ou aucun.
                 Adaptation pour fonctionnalité UDP.
     @brief      Ce fichier permet de faire une lecture des capteurs ds18b20 connecter et d'attribuer cette valeur à une variable.
                 Ce fichier utilise la librairie "W1ThermSensor".
+    @Auteurs    Andy Van Flores Gonzalez, Loïc Sarhy
+    @compilateur interpreteur Python
 '''
-
+#Librairies Python
 from w1thermsensor import W1ThermSensor # module 1-wire
+
+# Fichiers du programme Serrebrooke
 import syst_config # Fichier des variables, contantes, etc. configurables. Permet de modifier les valeurs sans affecter la logique du code.
 
 def getDS18B20():

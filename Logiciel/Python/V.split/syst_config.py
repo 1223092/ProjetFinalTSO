@@ -1,10 +1,13 @@
 '''
     @file       syst_config.py
-    @date       Avril 2022
+    @date       Avril 2024
     @version    0.2
-                Adaptation pour code NFT
+                
     @brief      Fichier des variables, contantes, etc. configurables.
                 Permet de modifier les valeurs sans affecter la logique du code.
+                
+    @Auteurs    Andy Van Flores Gonzalez, Loïc Sarhy
+    @compilateur interpreteur Python
 '''
 
 
@@ -67,12 +70,12 @@ TKLEN_VAR = 30 # taille du texte des variables
 ### </END OF FILE>
 ## Valeurs du channel ThingSpeak
 
-CHANNELID = "1328019"       # Channel CRIFA
-APIKEY = "VMDDBI3TNI7BRQQE" # API Key
+CHANNELID = "1296899"       # Channel CRIFA
+APIKEY = "H760997692T443A5" # API Key
 
-MQTT_CLIENTID = "EgMZGAssAScsHSopOxs1AhM"
-MQTT_USR = "EgMZGAssAScsHSopOxs1AhM"
-MQTT_PWD = "ui6OrERk+QfcGbNEvnUyJGHz"
+MQTT_CLIENTID = "JhwfFC0RLSsgHhI4MTkKLwo"
+MQTT_USR = "JhwfFC0RLSsgHhI4MTkKLwo"
+MQTT_PWD = "an8oTonCcaxFMvLBHmhnA1E6"
 
 # PERIDOSEUR-TEST
 # CHANNELID = "1676290"       # Channel

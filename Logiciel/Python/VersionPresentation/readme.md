@@ -17,15 +17,9 @@
 ## Matériel
 ### Fichiers
 <ul>
-<li>scripts.js</li>
-<li>styles.css</li>
-<li>index.html</li>
-<li>boucle_finale.py</li>
+<li>tab.py</li>
 <li>getSensors_atlas.py</li>
 <li>getSensors_ds18b20.py</li>
-<li>publish_ThingSpeak.py</li>
-<li>publish_UDP.py</li>
-<li>site_final.py</li>
 <li>syst_config.py</li>
 <li>syst_interface.py</li>
 <li>syst_logique.py</li>

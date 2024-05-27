@@ -1,15 +1,20 @@
 '''
     @file       publish_ThingSpeak.py
-    @date       Avril 2022
+    @date       Avril 2024
     @version    0.1
                 Adaptation pour fonctionnalité UDP.
-    @brief      Fichier permettant d'envoyer les données vers ThingSpeak.
+    @brief      Fichier permettant d'envoyer les données vers ThingSpeak. Vérifie quelle type de connexion est demandé et
+                envoyent les données selon le format de message json établie.
+                
+    @Auteurs    Andy Van Flores Gonzalez, Loïc Sarhy
+    @compilateur interpreteur Python
 '''
-
+#Librairies Python
 import paho.mqtt.publish as publish # module pour publié par MQTT
 import psutil # proposé avec référence thingspeak
-import syst_config  # Fichier des variables, contantes, etc. configurables. 
-                    # Permet de modifier les valeurs sans affecter la logique du code.
+
+# Fichiers du programme Serrebrooke
+import syst_config  # Fichier des variables, contantes, etc. configurables. Permet de modifier les valeurs sans affecter la logique du code.
 import getSensors_ds18b20 # valeurs température DS18B20
 import getSensors_atlas # valeurs mesures Atlas
 
