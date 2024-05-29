@@ -1,18 +1,6 @@
-# Fichier contenant les script bash de configuration relié au conteneur Balena
+# Running a full desktop in a container
 
-## autostart
-### Démarre le programme principal.
+Example project on how to run a desktop manager with [balenaCloud](https://balena.io) to run GUI applications.
+![](https://raw.githubusercontent.com/balena-io-playground/x11-window-manager/master/img/dm.jpg)
 
-## Dockerfile.raspberrypi3
-### Installation de l'environement graphique.
-### Installation des dépendances python.
-### Création des fichiers.
-
-## Dockerfile.template
-### Installation de l'environnement Balena.
-
-## start.sh
-### Configuration de X Window System (X11)
-
-## start_x86.sh
-### Configuration de X Window System (X11)
+### Follow the complete project post at [**https://www.balena.io/blog/running-a-desktop-manager-with-balena/**](https://www.balena.io/blog/running-a-desktop-manager-with-balena/).
